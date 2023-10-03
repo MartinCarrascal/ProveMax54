@@ -6,9 +6,6 @@
 package provemax54_data;
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,13 +17,7 @@ public class ProveedorData {
 
     public ProveedorData() {
         
-        try {
-            connection = Conexion.getConexion();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProveedorData.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProveedorData.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        connection = Conexion.getConexion();
      }
 
        

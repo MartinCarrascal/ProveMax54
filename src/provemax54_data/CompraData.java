@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package provemax54_data;
-
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.sql.Connection;
 import javax.swing.JOptionPane;
 import provemax54_entidades.CompraEntidades;
 
@@ -22,7 +17,7 @@ public class CompraData {
     
     public CompraData() {
         
-       connection =  Conexion.getConexion();
+       connection =  (Conexion) Conexion.getConexion();
     }
     
     private void mensaje(String mensaje) {
@@ -32,7 +27,7 @@ public class CompraData {
     
     public void guardarCompra(CompraEntidades compra) {
         
-        String sql = " ";
+        String sql = "INSERT INTO compra(idProveedor, LocalDate ";
         
     }
     
