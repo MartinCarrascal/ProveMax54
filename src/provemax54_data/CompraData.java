@@ -33,10 +33,10 @@ public class CompraData {
 
     public void guardarCompra(CompraEntidades compra) {
         
-        String sql = "INSERT INTO compra(idProveedor, LocalDate, estado)";
+        String sql = "INSERT INTO compra(idProveedor, fecha, estado) VALUES (?,?,?) ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, compra.getIdProveedor());
+            ps.setInt(1, compra.getProveedor().getIdProveedor());
             ps.setDate(2, Date.valueOf(compra.getFecha()));
             ps.setBoolean(3, compra.isEstado());
             ps.executeUpdate();

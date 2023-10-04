@@ -13,14 +13,23 @@ public class ProductoEntidades {
     private int idProducto;
     private String nombreProducto;
     private String descripcion;
-    private String precioActual;
+    private double precioActual;
     private int stock;
     private boolean estado;
 
     public ProductoEntidades() {
     }
 
-    public ProductoEntidades(String nombreProducto, String descripcion, String precioActual, int stock, boolean estado) {
+    public ProductoEntidades(String nombreProducto, String descripcion, double precioActual, int stock, boolean estado) {
+        this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
+        this.precioActual = precioActual;
+        this.stock = stock;
+        this.estado = estado;
+    }
+
+    public ProductoEntidades(int idProducto, String nombreProducto, String descripcion, double precioActual, int stock, boolean estado) {
+        this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
         this.precioActual = precioActual;
@@ -52,11 +61,11 @@ public class ProductoEntidades {
         this.descripcion = descripcion;
     }
 
-    public String getPrecioActual() {
+    public double getPrecioActual() {
         return precioActual;
     }
 
-    public void setPrecioActual(String precioActual) {
+    public void setPrecioActual(double precioActual) {
         this.precioActual = precioActual;
     }
 
