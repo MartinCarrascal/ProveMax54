@@ -7,6 +7,7 @@ package provemax54_data;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 import provemax54_entidades.CompraEntidades;
 import provemax54_entidades.ProductoEntidades;
 import provemax54_entidades.ProveedorEntidades;
@@ -29,7 +30,7 @@ public class main {
         ProveedorData proveedor = new ProveedorData();
         ProductoData producto = new ProductoData();
 
-        CompraEntidades compraE = new CompraEntidades(prov1, LocalDate.MIN.of(2023, Month.MARCH, 10), true);
+//        CompraEntidades compraE = new CompraEntidades(prov1, LocalDate.MIN.of(2023, Month.MARCH, 10), true);
         CompraData compra = new CompraData();
 
 //        proveedor.agregarProveedor(prov1);
@@ -37,12 +38,26 @@ public class main {
 //          producto.guardarProducto(galletas);
 //          proveedor.modificarProveedor(prov1);
 //          proveedor.eliminarProveedor(prov1);
-//            producto.modificarProducto(lapiz);
-            producto.eliminarProducto(galletas);
+//          producto.modificarProducto(lapiz);
+//          producto.eliminarProducto(galletas);
 
-          
+//            compra.guardarCompra(compraE);
+
+//       for (CompraEntidades inscripcion : compra.comprasProveedor(1)) {
+//                System.out.println(inscripcion);
+//                
+//        }
+            //Devuelve la lista de compras de un proveedor y lo pongo en una variable
+            // para poder poner size y que me de la cantidad
+         List<CompraEntidades> compraLista = compra.comprasProveedor(1);
+         
+         System.out.println(compraLista.size());
+        
    
-       
+              for (CompraEntidades c : compraLista) {
+                System.out.println(c);
+                
+        }
 
 
 

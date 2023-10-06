@@ -102,4 +102,35 @@ public class ProveedorData {
         }
     }
     
+    public ProveedorEntidades buscarPorID(int id) {
+
+        ProveedorEntidades proveedor = null;
+        String sql = "SELECT * FROM `proveedor` WHERE idProveedor = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+               proveedor = new ProveedorEntidades();
+               proveedor.setIdProveedor(rs.getInt("idProveedor"));
+               proveedor.setDomicilio(rs.getString("domicilio"));
+               proveedor.setRazonSocial(rs.getString("razonSocial"));
+               proveedor.setTelefono(rs.getString("telefono"));
+               proveedor.setEstado(rs.getBoolean("estado"));
+          
+            } else {
+                mensaje("No existe el Proveedor");
+                
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla Proveedor" + e.getMessage());
+        }
+        return proveedor;
+    }
+    
 }

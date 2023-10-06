@@ -6,6 +6,8 @@
 package provemax54_entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,14 +19,17 @@ public class CompraEntidades {
     private ProveedorEntidades proveedor;
     private LocalDate fecha;
     private boolean estado;
+    private List<DetalleCompraEntidades> listaDetalleCompra;
 
     public CompraEntidades() {
+        listaDetalleCompra = new ArrayList<>();
     }
 
     public CompraEntidades(ProveedorEntidades proveedor, LocalDate fecha, boolean estado) {
         this.proveedor = proveedor;
         this.fecha = fecha;
         this.estado = estado;
+        listaDetalleCompra = new ArrayList<>();
     }
 
     public CompraEntidades(int idCompra, ProveedorEntidades proveedor, LocalDate fecha, boolean estado) {
@@ -32,6 +37,7 @@ public class CompraEntidades {
         this.proveedor = proveedor;
         this.fecha = fecha;
         this.estado = estado;
+        listaDetalleCompra = new ArrayList<>();
     }
 
     public int getIdCompra() {
@@ -66,9 +72,18 @@ public class CompraEntidades {
         this.estado = estado;
     }
 
+    public List<DetalleCompraEntidades> getListaDetalleCompra() {
+        return listaDetalleCompra;
+    }
+
+    public void addListaDetalleCompra(DetalleCompraEntidades detalle) {
+        listaDetalleCompra.add(detalle);
+    }
+
     @Override
     public String toString() {
-        return "CompraEntidades{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + ", estado=" + estado + '}';
+        return "CompraEntidades{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + ", estado=" + estado + ", listaDetalleCompra=" + listaDetalleCompra + '}';
     }
-    
+
+  
 }

@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import provemax54_entidades.CompraEntidades;
 
@@ -21,10 +23,12 @@ import provemax54_entidades.CompraEntidades;
 public class CompraData {
 
     Connection connection = null;
+    ProveedorData proveedor = null;
 
     public CompraData() {
 
-        connection =  Conexion.getConexion();
+        connection = Conexion.getConexion();
+        proveedor = new ProveedorData();
     }
 
     private void mensaje(String mensaje) {
@@ -32,7 +36,7 @@ public class CompraData {
     }
 
     public CompraEntidades guardarCompra(CompraEntidades compra) {
-        
+
         String sql = "INSERT INTO compra(idProveedor, fecha, estado) VALUES (?,?,?) ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -53,7 +57,38 @@ public class CompraData {
         return compra;
     }
 
+    public List<CompraEntidades> comprasProveedor(int idProveedor) {
+
+        ArrayList<CompraEntidades> compra = new ArrayList<>();
+        CompraEntidades compraE = new CompraEntidades();
+//        String sql = "SELECT COUNT(*) AS total_compras FROM compra WHERE idProveedor = ?";
+        String sql = "SELECT * FROM `compra` WHERE idProveedor = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idProveedor);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                compraE.setProveedor(proveedor.buscarPorID(rs.getInt("idProveedor")));
+                compraE.setIdCompra(rs.getInt("idCompra"));
+                compraE.setEstado(rs.getBoolean("estado"));
+                compraE.setFecha(rs.getDate("fecha").toLocalDate());
+
+                compra.add(compraE);
+            }
+
+            ps.close();
+
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla Compra" + e.getMessage());
+        }
+        return compra;
+    }
     
+    
+    
+
 //    public CompraEntidades buscarCompra(int id) {
 //        
 //        CompraEntidades compra = null;
@@ -76,6 +111,4 @@ public class CompraData {
 //    ps.close();
 //    
 //
-    }
-
-
+}
