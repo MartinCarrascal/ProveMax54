@@ -8,6 +8,7 @@ package provemax54_data;
 import java.time.LocalDate;
 import java.time.Month;
 import provemax54_entidades.CompraEntidades;
+import provemax54_entidades.ProductoEntidades;
 import provemax54_entidades.ProveedorEntidades;
 
 /**
@@ -21,16 +22,27 @@ public class main {
      */
     public static void main(String[] args) {
 
-        ProveedorEntidades prov1 = new ProveedorEntidades("razonSocial", "domicilio", "454444455", true);
+        ProveedorEntidades prov1 = new ProveedorEntidades(1, "Telefonos", "av San marito", "555 5555", true);
+        ProductoEntidades galletas = new ProductoEntidades(2,"Don satur", "galletitas", 250, 2, true);
+        ProductoEntidades lapiz = new ProductoEntidades(1, "Micros", " micro sd", 4000, 1, true);
+        
         ProveedorData proveedor = new ProveedorData();
+        ProductoData producto = new ProductoData();
 
         CompraEntidades compraE = new CompraEntidades(prov1, LocalDate.MIN.of(2023, Month.MARCH, 10), true);
-        CompraData compraD  = new CompraData();
+        CompraData compra = new CompraData();
 
 //        proveedor.agregarProveedor(prov1);
-          compraD.guardarCompra(compraE);
+//          producto.guardarProducto(lapiz);
+//          producto.guardarProducto(galletas);
+//          proveedor.modificarProveedor(prov1);
+//          proveedor.eliminarProveedor(prov1);
+//            producto.modificarProducto(lapiz);
+            producto.eliminarProducto(galletas);
+
           
-      
+   
+       
 
 
 

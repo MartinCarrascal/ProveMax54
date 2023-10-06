@@ -58,4 +58,48 @@ public class ProveedorData {
         }
     }
     
+    public void modificarProveedor(ProveedorEntidades proveedor) {
+        
+        String sql = "UPDATE proveedor SET razonSocial = ?, domicilio = ?, telefono = ?, estado = ? WHERE idProveedor = ?";
+         PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, proveedor.getRazonSocial());
+            ps.setString(2, proveedor.getDomicilio());
+            ps.setString(3, proveedor.getTelefono());
+            ps.setBoolean(4, proveedor.isEstado());
+            ps.setInt(5, proveedor.getIdProveedor());
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+                mensaje("El proveedor " + proveedor.getRazonSocial() + " fue modificado exitosamente");
+            } else{
+                mensaje("El proveedor no se pudo modificar");
+            }
+            
+            ps.close();
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla proveedor " + e.getMessage());
+        }
+    }
+    
+    public void eliminarProveedor(ProveedorEntidades proveedor) {
+        
+        String sql = "UPDATE proveedor SET estado = 0 WHERE idProveedor = ?";
+        
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, proveedor.getIdProveedor());
+             int exito = ps.executeUpdate();
+           
+            if (exito ==1) {
+                mensaje("Se elimino el proveedor");
+            }else {
+                mensaje("El proveedor no se pudo eliminar");
+            }
+            
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla proveedor " + e.getMessage());
+        }
+    }
+    
 }

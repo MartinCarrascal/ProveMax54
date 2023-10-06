@@ -31,7 +31,7 @@ public class CompraData {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 
-    public void guardarCompra(CompraEntidades compra) {
+    public CompraEntidades guardarCompra(CompraEntidades compra) {
         
         String sql = "INSERT INTO compra(idProveedor, fecha, estado) VALUES (?,?,?) ";
         try {
@@ -50,6 +50,7 @@ public class CompraData {
         } catch (SQLException e) {
             mensaje("Error al acceder a la tabla Compra" + e.getMessage());
         }
+        return compra;
     }
 
     

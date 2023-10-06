@@ -58,4 +58,51 @@ public class ProductoData {
 
     }
 
+    public void modificarProducto(ProductoEntidades producto) {
+
+        String sql = "UPDATE producto SET nombreProducto = ?, descripcion = ?, precioActual = ?, stock = ?, estado =  ? WHERE idProducto = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, producto.getNombreProducto());
+            ps.setString(2, producto.getDescripcion());
+            ps.setDouble(3, producto.getPrecioActual());
+            ps.setInt(4, producto.getStock());
+            ps.setBoolean(5, producto.isEstado());
+            ps.setInt(6, producto.getIdProducto());
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                mensaje("El producto " + producto.getNombreProducto() + " fue modificado exitosamente");
+            } else {
+                mensaje("El producto no se pudo modificar");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla producto " + e.getMessage());
+        }
+
+    }
+    
+    public void eliminarProducto(ProductoEntidades producto) {
+        
+        String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, producto.getIdProducto());
+            int exito = ps.executeUpdate();
+            
+            if (exito == 1) {
+                mensaje("El producto fue eliminado exitosamente");
+            }else {
+                mensaje("El producto no se pudo eliminar");
+            }
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla producto " + e.getMessage());
+        }
+    }
+
 }
