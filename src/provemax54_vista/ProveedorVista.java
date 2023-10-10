@@ -79,8 +79,10 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jLabel4.setText("Telefono");
 
         jTRazonSocial.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTRazonSocial.setEnabled(false);
 
         jTDomicilio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTDomicilio.setEnabled(false);
         jTDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDomicilioActionPerformed(evt);
@@ -88,9 +90,11 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         });
 
         jTTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTTelefono.setEnabled(false);
 
         jBGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBGuardar.setText("Guardar");
+        jBGuardar.setEnabled(false);
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -99,6 +103,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         jBEliminar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBEliminar.setText("Eliminar");
+        jBEliminar.setEnabled(false);
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
@@ -115,6 +120,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         jBModificar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBModificar.setText("Modificar");
+        jBModificar.setEnabled(false);
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBModificarActionPerformed(evt);
@@ -248,23 +254,25 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTDomicilioActionPerformed
 
+    
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
 
         limpiar();
-        jREstado.setSelected(false);
+        jREstado.setSelected(true);
         jREstado.setEnabled(false);
         jTIdProveedor.setEnabled(true);
         jTRazonSocial.setEnabled(true);
         jTDomicilio.setEnabled(true);
         jTTelefono.setEnabled(true);
-        jREstado.setEnabled(true);
+       
 
         jBuscar.setEnabled(false);
         jBGuardar.setEnabled(true);
         jBEliminar.setEnabled(false);
         jBModificar.setEnabled(false);
         jBNuevo.setEnabled(true);
-
+        esNuevo = true;
+        jTIdProveedor.setEnabled(false);
 
     }//GEN-LAST:event_jBNuevoActionPerformed
 
@@ -273,16 +281,17 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         String input = jTIdProveedor.getText();
 
-        int idProveedor = Integer.parseInt(jTIdProveedor.getText());
+       
 
         if (esNuevo) {
             String razonSocial = jTRazonSocial.getText();
             String domicilio = jTDomicilio.getText();
             String telefono = jTTelefono.getText();
-            ProveedorEntidades prove = new ProveedorEntidades(idProveedor, razonSocial, domicilio, telefono, true);
+            ProveedorEntidades prove = new ProveedorEntidades(razonSocial, domicilio, telefono, true);
             provD.agregarProveedor(prove);
 
         } else {
+            int idProveedor = Integer.parseInt(jTIdProveedor.getText());
             ProveedorEntidades prove = provD.buscarPorID(idProveedor);
             prove.setRazonSocial(jTRazonSocial.getText());
             prove.setDomicilio(jTDomicilio.getText());
@@ -295,8 +304,11 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jTRazonSocial.setEnabled(false);
         jTDomicilio.setEnabled(false);
         jTTelefono.setEnabled(false);
+        jREstado.setSelected(false);
         jREstado.setEnabled(false);
         jBuscar.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        jTIdProveedor.setEnabled(true);
 
 
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -315,7 +327,8 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         ProveedorEntidades pro = provD.buscarPorID(idProveedor);
 
         int idProvi = pro.getIdProveedor();
-        provD.eliminarProveedor(provE);
+//        provD.eliminarProveedor(idProvi);
+        provD.eliminarProveedorPorId(idProvi);
         limpiar();
         jREstado.setSelected(false);
         jBEliminar.setEnabled(false);
@@ -342,7 +355,8 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
             idProveedor = Integer.parseInt(jTIdProveedor.getText());
 
             ProveedorEntidades provee = provD.buscarPorID(idProveedor);
-
+            
+            jBModificar.setEnabled(true);
             jTRazonSocial.setEnabled(false);
             jTDomicilio.setEnabled(false);
             jTTelefono.setEnabled(false);
@@ -358,6 +372,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
             jBGuardar.setEnabled(true);
             jBuscar.setEnabled(true);
             jBNuevo.setEnabled(true);
+            
 
         } else {
             JOptionPane.showMessageDialog(null, "El número de id del proveedor no es válido, debe contener solo números hasta 4 dígitos");

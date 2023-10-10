@@ -57,6 +57,7 @@ public class CompraData {
         return compra;
     }
 
+    //Todas las compras a un Proveedor 
     public List<CompraEntidades> comprasProveedor(int idProveedor) {
 
         ArrayList<CompraEntidades> compra = new ArrayList<>();
@@ -86,29 +87,25 @@ public class CompraData {
         return compra;
     }
     
+    public void eliminarCompra(int id) {
+        //Paso el id del alumno que quiero eliminar en el metodo 
+        
+        String sql = "UPDATE compra SET estado = 0 WHERE idCompra = ? ";
+        
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+           int exito = ps.executeUpdate();
+           
+            if (exito ==1) {
+                mensaje("Se elimino la compra");
+            }else {
+                mensaje("La compra no se pudo eliminar");
+            }
+            
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla compra " + e.getMessage());
+        }
+    }
     
     
-
-//    public CompraEntidades buscarCompra(int id) {
-//        
-//        CompraEntidades compra = null;
-//        String sql = "SELECT idProveedor, fecha FROM compra WHERE idCompra = ? AND estado = 1";
-//        PreparedStatement ps = null;
-//
-//        ps = connection.prepareStatement(sql);
-//        ps.setInt(1, id);
-//        ResultSet rs = ps.executeQuery();
-//
-//        if (rs.next()) {
-//            compra = new CompraEntidades();
-//        }
-//        compra.setIdCompra(id);
-//        compra.setIdProveedor(rs.getInt(id));
-//        compra.setEstado(true);
-//        
-//    }else{
-//    mensaje ("No existe la compra");
-//    ps.close();
-//    
-//
 }

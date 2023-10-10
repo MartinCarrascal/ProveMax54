@@ -105,6 +105,26 @@ public class ProveedorData {
             mensaje("Error al acceder a la tabla proveedor " + e.getMessage());
         }
     }
+    
+        public void eliminarProveedorPorId(int id) {
+
+        String sql = "UPDATE proveedor SET estado = 0 WHERE idProveedor = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                mensaje("Se elimino el proveedor");
+            } else {
+                mensaje("El proveedor no se pudo eliminar");
+            }
+
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla proveedor " + e.getMessage());
+        }
+    }
+    
 
     public ProveedorEntidades buscarPorID(int id) {
 
