@@ -27,21 +27,216 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        escritorio = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        JMProveedor = new javax.swing.JMenu();
+        jMCargarProveedor = new javax.swing.JMenuItem();
+        jMProducto = new javax.swing.JMenu();
+        jMCargarProducto = new javax.swing.JMenuItem();
+        jMCompra = new javax.swing.JMenu();
+        jMCargarCompra = new javax.swing.JMenuItem();
+        jMDetalleCompra = new javax.swing.JMenu();
+        jMDetalleComp = new javax.swing.JMenuItem();
+        jMDetalleProducto = new javax.swing.JMenu();
+        jMDetalleProd = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMSalir = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1310, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 819, Short.MAX_VALUE)
+        );
+
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        JMProveedor.setText("Proveedor");
+        JMProveedor.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        JMProveedor.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                JMProveedorComponentAdded(evt);
+            }
+        });
+        JMProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMProveedorActionPerformed(evt);
+            }
+        });
+
+        jMCargarProveedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMCargarProveedor.setText("Cargar Proveedor");
+        jMCargarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCargarProveedorActionPerformed(evt);
+            }
+        });
+        JMProveedor.add(jMCargarProveedor);
+
+        jMenuBar1.add(JMProveedor);
+
+        jMProducto.setText("Producto");
+        jMProducto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jMProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMProductoActionPerformed(evt);
+            }
+        });
+
+        jMCargarProducto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
+        jMCargarProducto.setText("Cargar Producto");
+        jMCargarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCargarProductoActionPerformed(evt);
+            }
+        });
+        jMProducto.add(jMCargarProducto);
+
+        jMenuBar1.add(jMProducto);
+
+        jMCompra.setText("Compra");
+        jMCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jMCargarCompra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMCargarCompra.setText("Crear Compra");
+        jMCargarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCargarCompraActionPerformed(evt);
+            }
+        });
+        jMCompra.add(jMCargarCompra);
+
+        jMenuBar1.add(jMCompra);
+
+        jMDetalleCompra.setText("Detalle Compra");
+        jMDetalleCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jMDetalleComp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMDetalleComp.setText("Detalle Compra");
+        jMDetalleComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMDetalleCompActionPerformed(evt);
+            }
+        });
+        jMDetalleCompra.add(jMDetalleComp);
+
+        jMenuBar1.add(jMDetalleCompra);
+
+        jMDetalleProducto.setText("Detalle Producto");
+        jMDetalleProducto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jMDetalleProd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        jMDetalleProd.setText("Detalle Producto");
+        jMDetalleProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMDetalleProdActionPerformed(evt);
+            }
+        });
+        jMDetalleProducto.add(jMDetalleProd);
+
+        jMenuBar1.add(jMDetalleProducto);
+
+        jMenu1.setText("Salir");
+        jMenu1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jMSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMSalir.setText("Salir");
+        jMSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMSalir);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(escritorio)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void JMProveedorComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_JMProveedorComponentAdded
+
+    }//GEN-LAST:event_JMProveedorComponentAdded
+
+    private void JMProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JMProveedorActionPerformed
+
+    private void jMDetalleCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleCompActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        DetalleCompraVista vistaDetCom = new DetalleCompraVista();
+        vistaDetCom.setVisible(true);
+        escritorio.add(vistaDetCom);
+        escritorio.moveToFront(vistaDetCom);
+    }//GEN-LAST:event_jMDetalleCompActionPerformed
+
+
+    private void jMCargarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarProveedorActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ProveedorVista vistaProv = new ProveedorVista();
+        vistaProv.setVisible(true);
+        escritorio.add(vistaProv);
+        escritorio.moveToFront(vistaProv);
+
+    }//GEN-LAST:event_jMCargarProveedorActionPerformed
+
+
+    private void jMProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProductoActionPerformed
+
+    }//GEN-LAST:event_jMProductoActionPerformed
+
+    private void jMCargarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarCompraActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        CompraVista vistaCom = new CompraVista();
+        vistaCom.setVisible(true);
+        escritorio.add(vistaCom);
+        escritorio.moveToFront(vistaCom);
+    }//GEN-LAST:event_jMCargarCompraActionPerformed
+
+    private void jMDetalleProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleProdActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        DetalleProductoVista vistaDetProd = new DetalleProductoVista();
+        vistaDetProd.setVisible(true);
+        escritorio.add(vistaDetProd);
+        escritorio.moveToFront(vistaDetProd);
+    }//GEN-LAST:event_jMDetalleProdActionPerformed
+
+    private void jMCargarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarProductoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ProductoVista vistaProd = new ProductoVista();
+        vistaProd.setVisible(true);
+        escritorio.add(vistaProd);
+        escritorio.moveToFront(vistaProd);
+    }//GEN-LAST:event_jMCargarProductoActionPerformed
+
+    private void jMSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +274,19 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu JMProveedor;
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jMCargarCompra;
+    private javax.swing.JMenuItem jMCargarProducto;
+    private javax.swing.JMenuItem jMCargarProveedor;
+    private javax.swing.JMenu jMCompra;
+    private javax.swing.JMenuItem jMDetalleComp;
+    private javax.swing.JMenu jMDetalleCompra;
+    private javax.swing.JMenuItem jMDetalleProd;
+    private javax.swing.JMenu jMDetalleProducto;
+    private javax.swing.JMenu jMProducto;
+    private javax.swing.JMenuItem jMSalir;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

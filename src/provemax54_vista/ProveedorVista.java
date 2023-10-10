@@ -5,17 +5,24 @@
  */
 package provemax54_vista;
 
+import javax.swing.JOptionPane;
+import provemax54_data.ProveedorData;
+import provemax54_entidades.ProveedorEntidades;
+
 /**
  *
  * @author Ideapad 5
  */
 public class ProveedorVista extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ProveedorVista
-     */
+    private boolean esNuevo;
+    ProveedorData provD;
+    ProveedorEntidades provE;
+
     public ProveedorVista() {
         initComponents();
+        provD = new ProveedorData();
+        provE = new ProveedorEntidades();
     }
 
     /**
@@ -27,6 +34,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -34,92 +42,201 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jTRazonSocial = new javax.swing.JTextField();
         jTDomicilio = new javax.swing.JTextField();
         jTTelefono = new javax.swing.JTextField();
-        jBAgregar = new javax.swing.JButton();
+        jBGuardar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
         jBuscar = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jREstado = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        jBNuevo = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jTIdProveedor = new javax.swing.JTextField();
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("PROVEEDOR");
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Razon Social");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Domicilio");
 
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Telefono");
 
+        jTRazonSocial.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jTDomicilio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDomicilioActionPerformed(evt);
             }
         });
 
-        jBAgregar.setText("Agregar");
+        jTTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
+        jBGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
+
+        jBEliminar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
+        jBuscar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBuscar.setText("Buscar");
+        jBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuscarActionPerformed(evt);
+            }
+        });
 
+        jBModificar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBModificar.setText("Modificar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
 
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
+
+        jREstado.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jREstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jREstadoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setText("Estado");
+
+        jBNuevo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBNuevo.setText("Nuevo");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel6.setText("Id Proveedor");
+
+        jTIdProveedor.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBAgregar)
-                        .addGap(82, 82, 82)
-                        .addComponent(jBEliminar))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBuscar)
-                .addGap(74, 74, 74))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(173, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBGuardar)
+                                .addGap(28, 28, 28)
+                                .addComponent(jBModificar)
+                                .addGap(41, 41, 41)
+                                .addComponent(jBNuevo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(296, 296, 296)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(69, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBModificar))
-                        .addGap(294, 294, 294))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jBSalir)
-                        .addGap(24, 24, 24))))
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                                .addComponent(jBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jREstado)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBEliminar)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jTIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBuscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jREstado)))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBuscar))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(108, 108, 108)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBAgregar)
+                    .addComponent(jBGuardar)
+                    .addComponent(jBModificar)
                     .addComponent(jBEliminar)
-                    .addComponent(jBModificar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                    .addComponent(jBNuevo))
+                .addGap(28, 28, 28)
                 .addComponent(jBSalir)
                 .addGap(16, 16, 16))
         );
@@ -131,18 +248,152 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTDomicilioActionPerformed
 
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+
+        limpiar();
+        jREstado.setSelected(false);
+        jREstado.setEnabled(false);
+        jTIdProveedor.setEnabled(true);
+        jTRazonSocial.setEnabled(true);
+        jTDomicilio.setEnabled(true);
+        jTTelefono.setEnabled(true);
+        jREstado.setEnabled(true);
+
+        jBuscar.setEnabled(false);
+        jBGuardar.setEnabled(true);
+        jBEliminar.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jBNuevo.setEnabled(true);
+
+
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+
+        String input = jTIdProveedor.getText();
+
+        int idProveedor = Integer.parseInt(jTIdProveedor.getText());
+
+        if (esNuevo) {
+            String razonSocial = jTRazonSocial.getText();
+            String domicilio = jTDomicilio.getText();
+            String telefono = jTTelefono.getText();
+            ProveedorEntidades prove = new ProveedorEntidades(idProveedor, razonSocial, domicilio, telefono, true);
+            provD.agregarProveedor(prove);
+
+        } else {
+            ProveedorEntidades prove = provD.buscarPorID(idProveedor);
+            prove.setRazonSocial(jTRazonSocial.getText());
+            prove.setDomicilio(jTDomicilio.getText());
+            prove.setTelefono(jTTelefono.getText());
+            prove.setEstado(true);
+            provD.modificarProveedor(prove);
+        }
+
+        limpiar();
+        jTRazonSocial.setEnabled(false);
+        jTDomicilio.setEnabled(false);
+        jTTelefono.setEnabled(false);
+        jREstado.setEnabled(false);
+        jBuscar.setEnabled(true);
+
+
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        jTIdProveedor.setEnabled(false);
+        jTRazonSocial.setEnabled(true);
+        jTDomicilio.setEnabled(true);
+        jTTelefono.setEnabled(true);
+        jREstado.setEnabled(true);
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+
+        int idProveedor = Integer.parseInt(jTIdProveedor.getText());
+        ProveedorEntidades pro = provD.buscarPorID(idProveedor);
+
+        int idProvi = pro.getIdProveedor();
+        provD.eliminarProveedor(provE);
+        limpiar();
+        jREstado.setSelected(false);
+        jBEliminar.setEnabled(false);
+
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+
+        esNuevo = false;
+        int idProveedor;
+
+        String input = jTIdProveedor.getText();
+
+        // Validar que input sea un número y tenga hasta 4 caracteres.      
+        if (input.matches("\\d{1,4}")) {
+
+          
+            idProveedor = Integer.parseInt(input);
+ 
+            idProveedor = Integer.parseInt(jTIdProveedor.getText());
+
+            ProveedorEntidades provee = provD.buscarPorID(idProveedor);
+
+            jTRazonSocial.setEnabled(false);
+            jTDomicilio.setEnabled(false);
+            jTTelefono.setEnabled(false);
+            jREstado.setEnabled(false);
+
+            jREstado.setEnabled(true);
+            jTRazonSocial.setText(provee.getRazonSocial());
+            jTDomicilio.setText(provee.getDomicilio());
+            jTTelefono.setText(provee.getTelefono());
+
+            jBEliminar.setEnabled(true);
+            jREstado.setSelected(provee.isEstado());
+            jBGuardar.setEnabled(true);
+            jBuscar.setEnabled(true);
+            jBNuevo.setEnabled(true);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El número de id del proveedor no es válido, debe contener solo números hasta 4 dígitos");
+        }
+
+    }//GEN-LAST:event_jBuscarActionPerformed
+
+    private void jREstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jREstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jREstadoActionPerformed
+
+    private void limpiar() {
+        jTIdProveedor.setText(title);
+        jTRazonSocial.setText("");
+        jTDomicilio.setText("");
+        jTTelefono.setText("");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBAgregar;
     private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBModificar;
+    private javax.swing.JButton jBNuevo;
     private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBuscar;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jREstado;
     private javax.swing.JTextField jTDomicilio;
+    private javax.swing.JTextField jTIdProveedor;
     private javax.swing.JTextField jTRazonSocial;
     private javax.swing.JTextField jTTelefono;
     // End of variables declaration//GEN-END:variables

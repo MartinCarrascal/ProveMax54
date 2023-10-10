@@ -38,12 +38,13 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jTDescripcion = new javax.swing.JTextField();
         jTPrecioActual = new javax.swing.JTextField();
         jTStock = new javax.swing.JTextField();
-        jTEstado = new javax.swing.JTextField();
         jBAgregar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
         jBuscar = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
+        jBCacelar = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,8 +88,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
         jTStock.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
-        jTEstado.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
         jBAgregar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBAgregar.setText("Agregar");
 
@@ -104,6 +103,11 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jBModificar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBModificar.setText("Modificar");
 
+        jBCacelar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBCacelar.setText("Cancelar");
+
+        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,35 +117,37 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(371, 371, 371)
                         .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jBAgregar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBAgregar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                                .addComponent(jBCacelar)
+                                .addGap(85, 85, 85)
+                                .addComponent(jBModificar))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                                     .addComponent(jTDescripcion)
-                                    .addComponent(jTMarca)
-                                    .addComponent(jTStock)
-                                    .addComponent(jTEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                                    .addComponent(jTPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(jBModificar)
-                                .addGap(0, 126, Short.MAX_VALUE)))))
-                .addGap(98, 98, 98)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBuscar)
-                    .addComponent(jBEliminar))
-                .addGap(172, 172, 172))
+                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTPrecioActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                                        .addComponent(jTStock, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))))))
+                .addGap(86, 86, 86)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBEliminar)
+                    .addComponent(jBuscar))
+                .addContainerGap(144, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBSalir)
                 .addGap(42, 42, 42))
         );
@@ -156,7 +162,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                     .addComponent(jTMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBuscar))
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(39, 39, 39)
@@ -165,13 +171,13 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                     .addComponent(jTPrecioActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                    .addComponent(jRadioButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBSalir)
@@ -180,6 +186,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBAgregar)
                             .addComponent(jBModificar)
+                            .addComponent(jBCacelar)
                             .addComponent(jBEliminar))
                         .addGap(71, 71, 71))))
         );
@@ -194,6 +201,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
+    private javax.swing.JButton jBCacelar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
@@ -205,8 +213,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTextField jTDescripcion;
-    private javax.swing.JTextField jTEstado;
     private javax.swing.JTextField jTMarca;
     private javax.swing.JTextField jTPrecioActual;
     private javax.swing.JTextField jTStock;
