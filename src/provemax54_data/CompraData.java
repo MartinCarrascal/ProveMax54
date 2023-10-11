@@ -107,5 +107,9 @@ public class CompraData {
         }
     }
     
+//    public List<CompraEntidades> compraPorFecha(Date fecha) {
+//        
+//    }
+//    
     
 }

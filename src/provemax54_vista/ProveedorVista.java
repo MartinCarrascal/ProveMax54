@@ -23,6 +23,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         initComponents();
         provD = new ProveedorData();
         provE = new ProveedorEntidades();
+
     }
 
     /**
@@ -292,6 +293,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         } else {
             int idProveedor = Integer.parseInt(jTIdProveedor.getText());
+           
             ProveedorEntidades prove = provD.buscarPorID(idProveedor);
             prove.setRazonSocial(jTRazonSocial.getText());
             prove.setDomicilio(jTDomicilio.getText());

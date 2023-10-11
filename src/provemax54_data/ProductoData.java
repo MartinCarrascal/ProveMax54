@@ -50,6 +50,8 @@ public class ProductoData {
                 ps.close();
                 rs.close();
 
+            } else {
+                mensaje("No se pudo agregar el producto ");
             }
 
         } catch (SQLException e) {

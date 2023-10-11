@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import provemax54_entidades.CompraEntidades;
+import provemax54_entidades.DetalleCompraEntidades;
 import provemax54_entidades.ProductoEntidades;
 import provemax54_entidades.ProveedorEntidades;
 
@@ -24,14 +25,23 @@ public class main {
     public static void main(String[] args) {
 
         ProveedorEntidades prov1 = new ProveedorEntidades(1, "Telefonos", "av San marito", "555 5555", true);
+        CompraEntidades compraE = new CompraEntidades(prov1, LocalDate.MIN.of(2023, Month.MARCH, 10), true);
+    
         ProductoEntidades galletas = new ProductoEntidades(2,"Don satur", "galletitas", 250, 2, true);
         ProductoEntidades lapiz = new ProductoEntidades(1, "Micros", " micro sd", 4000, 1, true);
+        DetalleCompraData detalle = new DetalleCompraData();
+        DetalleCompraEntidades deta = new DetalleCompraEntidades(1, 100, compraE , lapiz, true);
         
         ProveedorData proveedor = new ProveedorData();
         ProductoData producto = new ProductoData();
-
-//        CompraEntidades compraE = new CompraEntidades(prov1, LocalDate.MIN.of(2023, Month.MARCH, 10), true);
         CompraData compra = new CompraData();
+        ProveedorEntidades prov2 = new ProveedorEntidades("Samsung", "Azul 234", "4565 5948", true);
+        
+ 
+        
+        
+        
+//         proveedor.agregarProveedor(prov2);
 
 //        proveedor.agregarProveedor(prov1);
 //          producto.guardarProducto(lapiz);
@@ -49,15 +59,15 @@ public class main {
 //        }
             //Devuelve la lista de compras de un proveedor y lo pongo en una variable
             // para poder poner size y que me de la cantidad
-         List<CompraEntidades> compraLista = compra.comprasProveedor(1);
-         
-         System.out.println(compraLista.size());
-        
-   
-              for (CompraEntidades c : compraLista) {
-                System.out.println(c);
-                
-        }
+//         List<CompraEntidades> compraLista = compra.comprasProveedor(1);
+//         
+//         System.out.println(compraLista.size());
+//        
+//   
+//              for (CompraEntidades c : compraLista) {
+//                System.out.println(c);
+//                
+//        }
 
 
 

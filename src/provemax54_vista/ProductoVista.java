@@ -23,7 +23,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         initComponents();
         prodD = new ProductoData();
         prodE = new ProductoEntidades();
-
+        esNuevo = true;
     }
 
     /**
@@ -86,8 +86,10 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jLabel6.setText("Estado");
 
         jTMarca.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTMarca.setEnabled(false);
 
         jTDescripcion.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTDescripcion.setEnabled(false);
         jTDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDescripcionActionPerformed(evt);
@@ -95,8 +97,10 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         });
 
         jTPrecioActual.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTPrecioActual.setEnabled(false);
 
         jTStock.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTStock.setEnabled(false);
 
         jBGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBGuardar.setText("Guardar");
@@ -179,9 +183,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                                     .addComponent(jTMarca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                                     .addComponent(jTDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jREstado)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                        .addComponent(jTPrecioActual, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(jTStock, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                    .addComponent(jTPrecioActual))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -280,16 +283,15 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             jTDescripcion.setEnabled(false);
             jTPrecioActual.setEnabled(false);
             jTStock.setEnabled(false);
+            jREstado.setSelected(true);
             jREstado.setEnabled(false);
 
-            jREstado.setEnabled(true);
             jTMarca.setText(produ.getNombreProducto());
             jTDescripcion.setText(produ.getDescripcion());
             jTPrecioActual.setText(String.valueOf(produ.getPrecioActual()));
             jTStock.setText(String.valueOf(produ.getStock()));
 
             jBEliminar.setEnabled(true);
-            jREstado.setSelected(produ.isEstado());
             jBGuardar.setEnabled(true);
             jBuscar.setEnabled(true);
             jBNuevo.setEnabled(true);
@@ -309,10 +311,11 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
         int idProducto = Integer.parseInt(jTIdProducto.getText());
         ProductoEntidades prod = prodD.buscarProductoPorId(idProducto);
+        prod.setIdProducto(idProducto);
 
-        int idProd = prod.getIdProducto();
+//        int idProd = prod.getIdProducto();
         prodD.eliminarProducto(prod);
-        
+
         limpiar();
         jREstado.setSelected(false);
         jBEliminar.setEnabled(false);
@@ -320,29 +323,33 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiar();
-        jREstado.setSelected(false);
+        jREstado.setSelected(true);
         jREstado.setEnabled(false);
-        jTIdProducto.setEnabled(true);
+        jTIdProducto.setEnabled(false);
+        jTStock.setEnabled(true);
         jTMarca.setEnabled(true);
         jTDescripcion.setEnabled(true);
         jTPrecioActual.setEnabled(true);
-        jREstado.setEnabled(true);
 
-        jBuscar.setEnabled(true);
+        jBuscar.setEnabled(false);
         jBGuardar.setEnabled(true);
         jBEliminar.setEnabled(false);
         jBModificar.setEnabled(false);
         jBNuevo.setEnabled(true);
+        esNuevo = true;
 
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         jTIdProducto.setEnabled(false);
+        jREstado.setEnabled(false);
+        jREstado.setSelected(true);
         jTMarca.setEnabled(true);
         jTDescripcion.setEnabled(true);
         jTPrecioActual.setEnabled(true);
         jTStock.setEnabled(true);
-        jREstado.setEnabled(true);
+        esNuevo = false;
+
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -354,28 +361,32 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             double precioActual = Double.parseDouble(jTPrecioActual.getText());
             int stock = Integer.parseInt(jTStock.getText());
             ProductoEntidades prod = new ProductoEntidades(nombreProducto, descripcion, precioActual, stock, true);
-           
+
             prodD.guardarProducto(prod);
 
         } else {
             int idProducto = Integer.parseInt(jTIdProducto.getText());
             ProductoEntidades produc = prodD.buscarProductoPorId(idProducto);
+
             produc.setNombreProducto(jTMarca.getText());
             produc.setDescripcion(jTDescripcion.getText());
-            produc.setPrecioActual(Double.parseDouble (jTPrecioActual.getText()));
+            produc.setPrecioActual(Double.parseDouble(jTPrecioActual.getText()));
             produc.setStock(Integer.parseInt(jTStock.getText()));
-           
+            produc.setEstado(true);
+            produc.setIdProducto(idProducto);
+
             prodD.modificarProducto(produc);
         }
 
         limpiar();
-        jTIdProducto.setEnabled(false);
+        jTIdProducto.setEnabled(true);
         jTMarca.setEnabled(false);
         jTDescripcion.setEnabled(false);
         jTStock.setEnabled(false);
-        jTStock.setEnabled(false);
+        jTPrecioActual.setEnabled(false);
         jREstado.setEnabled(false);
         jBuscar.setEnabled(true);
+
 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
