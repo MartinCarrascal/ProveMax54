@@ -104,5 +104,34 @@ public class ProductoData {
             mensaje("Error al acceder a la tabla producto " + e.getMessage());
         }
     }
+    
+        public ProductoEntidades buscarProductoPorId(int dni) {
+
+        ProductoEntidades producto = null;
+        String sql = "SELECT nombreProducto, descripcion, precioActual, stock FROM producto WHERE idProducto = ? AND estado = 1";
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                producto = new ProductoEntidades();
+                producto.setNombreProducto(rs.getString("nombreProducto"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+               
+
+            } else {
+                mensaje("No exixte el producto");
+                ps.close();
+            }
+            
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla producto" + e.getMessage());
+        }
+        return producto;
+    }
 
 }
