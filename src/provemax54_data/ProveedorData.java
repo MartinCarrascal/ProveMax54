@@ -211,6 +211,33 @@ public class ProveedorData {
         }
         return prov;
     }
+    
+    public ProveedorEntidades buscarProveedorPorRazonSocial (String proveedor){
+        
+        ProveedorEntidades prov = null;
+        String sql = "SELECT domicilio, telefono FROM `proveedor` WHERE razonSocial = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(2, "razonSocial");
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){               
+                             
+String telefono = rs.getString("telefono");
+String domicilio = rs.getString("domicilio");
+             
+                
+            }else{
+                mensaje("No existe el proveedor");
+                ps.close();
+            }
+        } catch (Exception e) {
+                mensaje("Error al acceder a la tabla Proveedor" + e.getMessage());
+        }
+        return prov;
+    }
 }
 
 

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class Conexion {
 
-        private static String url = "jdbc:mariadb://localhost:3307/provemax54";
+        private static String url = "jdbc:mariadb://localhost:3306/provemax54";
     private static String usuario = "root";
     private static String password = "";
     private static Connection connection;

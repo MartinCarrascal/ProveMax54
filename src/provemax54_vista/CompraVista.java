@@ -5,19 +5,55 @@
  */
 package provemax54_vista;
 
-import provemax54_entidades.ProveedorEntidades;
 
-/**
- *
- * @author Ideapad 5
- */
+
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import provemax54_entidades.ProveedorEntidades;
+import provemax54_entidades.CompraEntidades;
+import provemax54_entidades.DetalleCompraEntidades;
+import provemax54_entidades.ProductoEntidades;
+import provemax54_data.CompraData;
+import provemax54_data.ProveedorData;
+import provemax54_data.ProductoData;
+import provemax54_data.DetalleCompraData;
+
 public class CompraVista extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CompraVista
      */
+     private DefaultTableModel modelo;
+    private ProveedorData pv;
+    private ProductoData prodData;
+    private ProveedorEntidades proveedorSeleccionado;
+    private DefaultComboBoxModel comboModel = new DefaultComboBoxModel();
+    private DetalleCompraData inData;
+    private ProveedorData tel;
+    
+        List<ProveedorEntidades> rSocial;
+    
+        //para la tabla
+       
+        
     public CompraVista() {
         initComponents();
+          modelo = new DefaultTableModel();
+        pv = new ProveedorData();
+        rSocial = pv.listarProveedor();
+        prodData = new ProductoData();
+        proveedorSeleccionado = new ProveedorEntidades();
+    
+       
+        cargarCombo(rSocial);
+        armarCabecera();
+           
+        //Hago un evento que escuche al seleccinar un item
+
     }
 
     /**
@@ -82,6 +118,11 @@ public class CompraVista extends javax.swing.JInternalFrame {
         });
 
         jCBuscarRazonSocial.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jCBuscarRazonSocial.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBuscarRazonSocialItemStateChanged(evt);
+            }
+        });
         jCBuscarRazonSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBuscarRazonSocialActionPerformed(evt);
@@ -101,7 +142,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Marca", "Descripcion", "Cantidad", "Precio Unit.", "Total"
+                "Marca", "Descripcion", "Precio Unit.", "Cantidad", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -159,35 +200,36 @@ public class CompraVista extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jCBuscarRazonSocial, 0, 319, Short.MAX_VALUE)
-                                .addComponent(jTDomicilio)
+                                .addComponent(jTDomicilio, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
                                 .addComponent(jTTelefono))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(268, 268, 268)
-                                    .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel2))))
-                        .addComponent(jLabel10)
+                                .addComponent(jLabel7)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1027, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jBCargarProd)
                                     .addGap(99, 99, 99)
-                                    .addComponent(jBEliminarProd)
-                                    .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jBEliminarProd))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jCBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGap(405, 405, 405)
-                            .addComponent(jButton1))))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCBuscarRazonSocial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(353, 353, 353)
+                                    .addComponent(jLabel5)))
+                            .addGap(73, 73, 73)
+                            .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel2))))
                 .addContainerGap(71, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -205,15 +247,18 @@ public class CompraVista extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel10)
-                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabel5)))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCBuscarRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
+                    .addComponent(jCBuscarRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -256,11 +301,34 @@ public class CompraVista extends javax.swing.JInternalFrame {
 
     private void jCBuscarRazonSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBuscarRazonSocialActionPerformed
         // TODO add your handling code here:
+        
+        borrarFilaTabla();
+        ProveedorEntidades yyy = new ProveedorEntidades();                     
+   yyy = (ProveedorEntidades) jCBuscarRazonSocial.getSelectedItem();         
+jTDomicilio.setText(yyy.getDomicilio());
+jTTelefono.setText(yyy.getTelefono());  
+llenar();  
     }//GEN-LAST:event_jCBuscarRazonSocialActionPerformed
 
     private void jBGuardarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBGuardarCompraActionPerformed
+
+    private void jCBuscarRazonSocialItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBuscarRazonSocialItemStateChanged
+//         TODO add your handling code here:
+            
+       
+           
+//             System.out.println("el telefono de la empresa es: " + buscarTelefono);
+//               ProveedorEntidades telefono = new ProveedorEntidades();
+//               telefono = proveedorSeleccionado.getTelefono();
+         
+             
+               
+          
+
+
+    }//GEN-LAST:event_jCBuscarRazonSocialItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -300,4 +368,54 @@ public class CompraVista extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private com.toedter.calendar.JYearChooser jYearChooser2;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+       filaCabecera.add("Marca");
+       filaCabecera.add("Descripcion");
+      filaCabecera.add("Cantidad");
+       filaCabecera.add("Precio Unit.");
+      filaCabecera.add("Total");
+        for (Object o : filaCabecera) {
+            modelo.addColumn(o);
+        }
+        jTable1.setModel(modelo);
+    }
+    
+    private void borrarFilaTabla(){
+    int indice = modelo.getRowCount() -1; 
+    
+        for (int i = indice; i > 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+      private void cargarCombo(List<ProveedorEntidades> prov) {
+      
+        for (ProveedorEntidades listarProveedores : prov) {
+           
+             comboModel.addElement(listarProveedores);
+         
+        }
+       
+       jCBuscarRazonSocial.setModel(comboModel);
+    }
+
+    public void llenar() {
+         if (jTable1.getRowCount() != 0) {
+             for (int i = jTable1.getRowCount() -1; i >= 0; i--) {
+                 modelo.removeRow(i);
+             }
+        }
+   
+        DetalleCompraEntidades selec =(DetalleCompraEntidades) jCBuscarRazonSocial.getSelectedItem();
+//        List<  DetalleCompraEntidades> lista = (List<  DetalleCompraEntidades>) inData.buscarProveedor(selec.getRazonSocial());
+         List<  DetalleCompraEntidades> lista = (List<  DetalleCompraEntidades>) inData.guardarDetalleCompra(selec.);
+        for (  DetalleCompraEntidades dtc: lista) {
+            modelo.addRow(new Object[] {dtc.getCompra()});
+        }
+       
+        }
+    
+
 }

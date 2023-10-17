@@ -11,8 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import provemax54_entidades.CompraEntidades;
 import provemax54_entidades.DetalleCompraEntidades;
 import provemax54_entidades.ProductoEntidades;
+import provemax54_entidades.ProveedorEntidades;
 
 /**
  *
@@ -54,11 +56,45 @@ public class DetalleCompraData {
             }
 
         } catch (SQLException e) {
-            mensaje("No se puedo acceder a la table" + e.getMessage());
+            mensaje("No se puedo acceder a la tabla" + e.getMessage());
         }
             return detalleCompra;
     }
     
-    
+    public DetalleCompraEntidades obtenerDetalleCompra(DetalleCompraEntidades det, CompraEntidades compra, ProveedorEntidades prov){
+  
+          String sql = "SELECT detallecompra ( idCompra , idProducto ,  cantidad ,  precioCosto , estado) FROM detallecompra WHERE idProveedor = ?";
+
+         PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, prov.getIdProveedor());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                DetalleCompraEntidades detalle = new DetalleCompraEntidades();
+//               detalle.setNombreProducto(rs.getString("nombreProducto"));
+//                detalle.setDescripcion(rs.getString("descripcion"));
+//                producto.setPrecioActual(rs.getDouble("precioActual"));
+//                producto.setStock(rs.getInt("stock"));
+
+detalle.setCompra(compra); //verificar si recibe
+detalle.setCantidad(Integer.parseInt(rs.getString("idCompra")));
+detalle.setPrecioCosto((rs.getDouble("precioCosto")));
+
+//detalle.setCantidad();
+               
+
+            } else {
+                mensaje("No existe la compra");
+                ps.close();
+            }
+            
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla compra" + e.getMessage());
+        }
+        return det;
+      
+    }
     
 }
