@@ -55,6 +55,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jREstado = new javax.swing.JRadioButton();
         jTIdProducto = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jBCancelar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,6 +160,14 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setText("Id Producto");
 
+        jBCancelar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBCancelar.setText("Cancelar");
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,21 +179,21 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBGuardar)
-                                .addGap(71, 71, 71)
+                                .addGap(31, 31, 31)
                                 .addComponent(jBModificar)
-                                .addGap(54, 54, 54)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTIdProducto)
+                            .addComponent(jTMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                            .addComponent(jTDescripcion)
+                            .addComponent(jREstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                            .addComponent(jTPrecioActual, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTIdProducto, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTMarca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
-                                    .addComponent(jTDescripcion, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jREstado)
-                                    .addComponent(jTStock, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                    .addComponent(jTPrecioActual))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
@@ -192,16 +201,19 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel7))))))
+                                    .addComponent(jLabel7)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jBCancelar)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 109, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBuscar)
-                        .addContainerGap(162, Short.MAX_VALUE))
+                        .addContainerGap(235, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(38, 38, 38)
                         .addComponent(jBEliminar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(192, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +254,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jREstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBSalir)
@@ -252,6 +264,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                             .addComponent(jBGuardar)
                             .addComponent(jBNuevo)
                             .addComponent(jBModificar)
+                            .addComponent(jBCancelar)
                             .addComponent(jBEliminar))
                         .addGap(71, 71, 71))))
         );
@@ -283,18 +296,21 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             jTDescripcion.setEnabled(false);
             jTPrecioActual.setEnabled(false);
             jTStock.setEnabled(false);
-            jREstado.setSelected(true);
+            jREstado.setSelected(false);
             jREstado.setEnabled(false);
 
-            jTMarca.setText(produ.getNombreProducto());
-            jTDescripcion.setText(produ.getDescripcion());
-            jTPrecioActual.setText(String.valueOf(produ.getPrecioActual()));
-            jTStock.setText(String.valueOf(produ.getStock()));
-
+            try {
+                jTMarca.setText(produ.getNombreProducto());
+                jTDescripcion.setText(produ.getDescripcion());
+                jTPrecioActual.setText(String.valueOf(produ.getPrecioActual()));
+                jTStock.setText(String.valueOf(produ.getStock()));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Intente nuevamente");
+            }
             jBEliminar.setEnabled(true);
-            jBGuardar.setEnabled(true);
+            jBGuardar.setEnabled(false);
             jBuscar.setEnabled(true);
-            jBNuevo.setEnabled(true);
+            jBNuevo.setEnabled(false);
 
         } else {
             JOptionPane.showMessageDialog(null, "El número de id del proveedor no es válido, debe contener solo números hasta 4 dígitos");
@@ -318,8 +334,20 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
         limpiar();
         jREstado.setSelected(false);
+        jTStock.setEnabled(false);
+        jTMarca.setEnabled(false);
+        jTDescripcion.setEnabled(false);
+        jTPrecioActual.setEnabled(false);
+
         jBEliminar.setEnabled(false);
+        jBuscar.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jBNuevo.setEnabled(true);
+        jTIdProducto.setEnabled(true);
+
     }//GEN-LAST:event_jBEliminarActionPerformed
+
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiar();
@@ -335,20 +363,27 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jBGuardar.setEnabled(true);
         jBEliminar.setEnabled(false);
         jBModificar.setEnabled(false);
-        jBNuevo.setEnabled(true);
+        jBNuevo.setEnabled(false);
         esNuevo = true;
-
+        jTIdProducto.setEnabled(false);
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         jTIdProducto.setEnabled(false);
         jREstado.setEnabled(false);
-        jREstado.setSelected(true);
+        jREstado.setSelected(false);
         jTMarca.setEnabled(true);
         jTDescripcion.setEnabled(true);
         jTPrecioActual.setEnabled(true);
         jTStock.setEnabled(true);
-        esNuevo = false;
+
+        jBuscar.setEnabled(false);
+        jBGuardar.setEnabled(true);
+        jBEliminar.setEnabled(true);
+        jBModificar.setEnabled(true);
+        jBNuevo.setEnabled(false);
+        esNuevo = true;
+
 
     }//GEN-LAST:event_jBModificarActionPerformed
 
@@ -361,7 +396,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             double precioActual = Double.parseDouble(jTPrecioActual.getText());
             int stock = Integer.parseInt(jTStock.getText());
             ProductoEntidades prod = new ProductoEntidades(nombreProducto, descripcion, precioActual, stock, true);
-
             prodD.guardarProducto(prod);
 
         } else {
@@ -385,10 +419,35 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jTStock.setEnabled(false);
         jTPrecioActual.setEnabled(false);
         jREstado.setEnabled(false);
+
         jBuscar.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        jBEliminar.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jBNuevo.setEnabled(true);
 
 
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+
+        limpiar();
+        jREstado.setSelected(false);
+        jREstado.setEnabled(false);
+        jTIdProducto.setEnabled(true);
+        jTStock.setEnabled(false);
+        jTMarca.setEnabled(false);
+        jTDescripcion.setEnabled(false);
+        jTPrecioActual.setEnabled(false);
+
+        jBuscar.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        jBEliminar.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jBNuevo.setEnabled(true);
+        esNuevo = false;
+        jTIdProducto.setEnabled(true);
+    }//GEN-LAST:event_jBCancelarActionPerformed
 
     private void limpiar() {
         jTIdProducto.setText("");
@@ -402,6 +461,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBModificar;

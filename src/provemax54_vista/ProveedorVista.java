@@ -53,6 +53,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jBNuevo = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTIdProveedor = new javax.swing.JTextField();
+        jBCancelar = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -159,6 +160,14 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         jTIdProveedor.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
+        jBCancelar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBCancelar.setText("Cancelar");
+        jBCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,14 +182,16 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
                         .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(296, 296, 296)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBGuardar)
                                 .addGap(28, 28, 28)
                                 .addComponent(jBModificar)
                                 .addGap(41, 41, 41)
-                                .addComponent(jBNuevo))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(296, 296, 296)
-                                .addComponent(jLabel1)))
+                                .addComponent(jBNuevo)
+                                .addGap(54, 54, 54)
+                                .addComponent(jBCancelar)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(69, Short.MAX_VALUE)
@@ -242,7 +253,8 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
                     .addComponent(jBGuardar)
                     .addComponent(jBModificar)
                     .addComponent(jBEliminar)
-                    .addComponent(jBNuevo))
+                    .addComponent(jBNuevo)
+                    .addComponent(jBCancelar))
                 .addGap(28, 28, 28)
                 .addComponent(jBSalir)
                 .addGap(16, 16, 16))
@@ -255,7 +267,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTDomicilioActionPerformed
 
-    
+
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
 
         limpiar();
@@ -265,13 +277,12 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jTRazonSocial.setEnabled(true);
         jTDomicilio.setEnabled(true);
         jTTelefono.setEnabled(true);
-       
 
         jBuscar.setEnabled(false);
         jBGuardar.setEnabled(true);
         jBEliminar.setEnabled(false);
         jBModificar.setEnabled(false);
-        jBNuevo.setEnabled(true);
+        jBNuevo.setEnabled(false);
         esNuevo = true;
         jTIdProveedor.setEnabled(false);
 
@@ -280,10 +291,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
-        String input = jTIdProveedor.getText();
-
-       
-
+//        String input = jTIdProveedor.getText();
         if (esNuevo) {
             String razonSocial = jTRazonSocial.getText();
             String domicilio = jTDomicilio.getText();
@@ -293,7 +301,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         } else {
             int idProveedor = Integer.parseInt(jTIdProveedor.getText());
-           
+
             ProveedorEntidades prove = provD.buscarPorID(idProveedor);
             prove.setRazonSocial(jTRazonSocial.getText());
             prove.setDomicilio(jTDomicilio.getText());
@@ -308,19 +316,31 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jTTelefono.setEnabled(false);
         jREstado.setSelected(false);
         jREstado.setEnabled(false);
+
         jBuscar.setEnabled(true);
         jBGuardar.setEnabled(false);
+        jBEliminar.setEnabled(false);
+        jBNuevo.setEnabled(true);
+        jBModificar.setEnabled(false);
         jTIdProveedor.setEnabled(true);
-
 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        jTIdProveedor.setEnabled(false);
+
         jTRazonSocial.setEnabled(true);
         jTDomicilio.setEnabled(true);
         jTTelefono.setEnabled(true);
         jREstado.setEnabled(true);
+
+        jBuscar.setEnabled(false);
+        jBGuardar.setEnabled(true);
+        jBEliminar.setEnabled(true);
+        jBNuevo.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jBCancelar.setEnabled(true);
+        jTIdProveedor.setEnabled(false);
+
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -331,9 +351,20 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         int idProvi = pro.getIdProveedor();
 //        provD.eliminarProveedor(idProvi);
         provD.eliminarProveedorPorId(idProvi);
+
         limpiar();
+        jTRazonSocial.setEnabled(false);
+        jTDomicilio.setEnabled(false);
+        jTTelefono.setEnabled(false);
+        jREstado.setEnabled(false);
+
         jREstado.setSelected(false);
         jBEliminar.setEnabled(false);
+        jBuscar.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        jBNuevo.setEnabled(true);
+        jBModificar.setEnabled(false);
+        jTIdProveedor.setEnabled(true);
 
     }//GEN-LAST:event_jBEliminarActionPerformed
 
@@ -351,30 +382,33 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         // Validar que input sea un número y tenga hasta 4 caracteres.      
         if (input.matches("\\d{1,4}")) {
 
-          
             idProveedor = Integer.parseInt(input);
- 
+
             idProveedor = Integer.parseInt(jTIdProveedor.getText());
 
             ProveedorEntidades provee = provD.buscarPorID(idProveedor);
-            
+
             jBModificar.setEnabled(true);
             jTRazonSocial.setEnabled(false);
             jTDomicilio.setEnabled(false);
             jTTelefono.setEnabled(false);
             jREstado.setEnabled(false);
 
-            jREstado.setEnabled(true);
-            jTRazonSocial.setText(provee.getRazonSocial());
-            jTDomicilio.setText(provee.getDomicilio());
-            jTTelefono.setText(provee.getTelefono());
+            try {
+                jREstado.setEnabled(true);
+                jTRazonSocial.setText(provee.getRazonSocial());
+                jTDomicilio.setText(provee.getDomicilio());
+                jTTelefono.setText(provee.getTelefono());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Intente nuevamente");
+            }
 
             jBEliminar.setEnabled(true);
             jREstado.setSelected(provee.isEstado());
-            jBGuardar.setEnabled(true);
+            jBGuardar.setEnabled(false);
+            jBModificar.setEnabled(true);
             jBuscar.setEnabled(true);
-            jBNuevo.setEnabled(true);
-            
+            jBNuevo.setEnabled(false);
 
         } else {
             JOptionPane.showMessageDialog(null, "El número de id del proveedor no es válido, debe contener solo números hasta 4 dígitos");
@@ -386,6 +420,25 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jREstadoActionPerformed
 
+    private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
+        limpiar();
+        jREstado.setSelected(false);
+        jREstado.setEnabled(false);
+        jTIdProveedor.setEnabled(true);
+        jTRazonSocial.setEnabled(false);
+        jTDomicilio.setEnabled(false);
+        jTTelefono.setEnabled(false);
+
+        jBuscar.setEnabled(true);
+        jBGuardar.setEnabled(false);
+        jBEliminar.setEnabled(false);
+        jBModificar.setEnabled(false);
+        jBNuevo.setEnabled(true);
+        esNuevo = false;
+        jTIdProveedor.setEnabled(true);
+
+    }//GEN-LAST:event_jBCancelarActionPerformed
+
     private void limpiar() {
         jTIdProveedor.setText(title);
         jTRazonSocial.setText("");
@@ -395,6 +448,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCancelar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBModificar;

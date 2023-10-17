@@ -29,16 +29,18 @@ public class Vista extends javax.swing.JFrame {
 
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
         JMProveedor = new javax.swing.JMenu();
         jMCargarProveedor = new javax.swing.JMenuItem();
         jMProducto = new javax.swing.JMenu();
         jMCargarProducto = new javax.swing.JMenuItem();
-        jMCompra = new javax.swing.JMenu();
-        jMCargarCompra = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
         jMDetalleCompra = new javax.swing.JMenu();
         jMDetalleComp = new javax.swing.JMenuItem();
         jMDetalleProducto = new javax.swing.JMenu();
         jMDetalleProd = new javax.swing.JMenuItem();
+        jMCompra = new javax.swing.JMenu();
+        jMCargarCompra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMSalir = new javax.swing.JMenuItem();
 
@@ -52,10 +54,13 @@ public class Vista extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 819, Short.MAX_VALUE)
+            .addGap(0, 821, Short.MAX_VALUE)
         );
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jMenu2.setText("ENTIDADES");
+        jMenu2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         JMProveedor.setText("Proveedor");
         JMProveedor.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -79,7 +84,7 @@ public class Vista extends javax.swing.JFrame {
         });
         JMProveedor.add(jMCargarProveedor);
 
-        jMenuBar1.add(JMProveedor);
+        jMenu2.add(JMProveedor);
 
         jMProducto.setText("Producto");
         jMProducto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -98,21 +103,12 @@ public class Vista extends javax.swing.JFrame {
         });
         jMProducto.add(jMCargarProducto);
 
-        jMenuBar1.add(jMProducto);
+        jMenu2.add(jMProducto);
 
-        jMCompra.setText("Compra");
-        jMCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jMenuBar1.add(jMenu2);
 
-        jMCargarCompra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMCargarCompra.setText("Crear Compra");
-        jMCargarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMCargarCompraActionPerformed(evt);
-            }
-        });
-        jMCompra.add(jMCargarCompra);
-
-        jMenuBar1.add(jMCompra);
+        jMenu3.setText("CONSULTAS");
+        jMenu3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jMDetalleCompra.setText("Detalle Compra");
         jMDetalleCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -126,7 +122,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMDetalleCompra.add(jMDetalleComp);
 
-        jMenuBar1.add(jMDetalleCompra);
+        jMenu3.add(jMDetalleCompra);
 
         jMDetalleProducto.setText("Detalle Producto");
         jMDetalleProducto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -140,7 +136,23 @@ public class Vista extends javax.swing.JFrame {
         });
         jMDetalleProducto.add(jMDetalleProd);
 
-        jMenuBar1.add(jMDetalleProducto);
+        jMenu3.add(jMDetalleProducto);
+
+        jMenuBar1.add(jMenu3);
+
+        jMCompra.setText("COMPRA");
+        jMCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        jMCargarCompra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMCargarCompra.setText("Crear Compra");
+        jMCargarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCargarCompraActionPerformed(evt);
+            }
+        });
+        jMCompra.add(jMCargarCompra);
+
+        jMenuBar1.add(jMCompra);
 
         jMenu1.setText("Salir");
         jMenu1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -287,6 +299,8 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenu jMProducto;
     private javax.swing.JMenuItem jMSalir;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
