@@ -5,11 +5,14 @@
  */
 package provemax54_vista;
 
+import provemax54_entidades.ProductoEntidades;
+
 /**
  *
  * @author Ideapad 5
  */
 public class DetalleProductoPorProveedorVista extends javax.swing.JInternalFrame {
+    ProductoEntidades producto;
 
     /**
      * Creates new form DetalleProducto

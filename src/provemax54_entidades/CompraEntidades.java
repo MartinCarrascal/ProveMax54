@@ -80,6 +80,15 @@ public class CompraEntidades {
         listaDetalleCompra.add(detalle);
     }
 
+    public double devolverTotal() {
+        double total = 0;
+        
+        for (DetalleCompraEntidades detalle : listaDetalleCompra) {
+            total += detalle.devolverSubtotal();
+        }
+        return total;
+    }
+ 
     @Override
     public String toString() {
         return "CompraEntidades{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + ", estado=" + estado + ", listaDetalleCompra=" + listaDetalleCompra + '}';

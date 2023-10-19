@@ -33,15 +33,15 @@ public class DetalleCompraData {
 
     public DetalleCompraEntidades guardarDetalleCompra(DetalleCompraEntidades detalleCompra) {
 
-        String sql = "INSERT INTO  detallecompra ( idCompra , idProducto ,  cantidad ,  precioCosto , estado) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO  detallecompra ( idCompra , idProducto ,  cantidad ,  precioCosto ) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, detalleCompra.getCompra().getIdCompra());
+            ps.setInt(1, detalleCompra.getIdCompra());
             ps.setInt(2, detalleCompra.getProducto().getIdProducto());
             ps.setInt(3, detalleCompra.getCantidad());
             ps.setDouble(4, detalleCompra.getPrecioCosto());
-            ps.setBoolean(5, detalleCompra.isEstado());
+      
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 

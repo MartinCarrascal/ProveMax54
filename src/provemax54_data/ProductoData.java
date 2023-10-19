@@ -10,8 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import provemax54_entidades.ProductoEntidades;
+import provemax54_entidades.ProveedorEntidades;
 
 /**
  *
@@ -135,4 +138,61 @@ public class ProductoData {
         return producto;
     }
 
+          public List<ProductoEntidades> listarProductos() {
+        ArrayList<ProductoEntidades> productos = new ArrayList<>();
+        String sql = "SELECT * FROM producto WHERE estado = 1 ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductoEntidades prod = new ProductoEntidades();
+
+                prod.setIdProducto(rs.getInt("idProducto"));
+                prod.setNombreProducto(rs.getString("nombreProducto"));
+                prod.setDescripcion(rs.getString("descripcion"));
+                prod.setPrecioActual(rs.getDouble("precioActual"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setEstado(rs.getBoolean("estado"));
+
+                productos.add(prod);
+                ps.close();
+
+            }
+        } catch (Exception e) {
+            mensaje("Error al acceder a la tabla Proveedor" + e.getMessage());
+        }
+        return productos;
+
+    }
+          
+         public boolean consultarStock( int id, int cant) {
+
+        int stock = 0;
+      
+        String sql = "SELECT stock FROM producto WHERE idProducto = ? AND estado = 1";
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                
+                stock = rs.getInt("stock");
+                if (stock >= cant) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } else {
+                mensaje("No exixte el producto");
+                ps.close();
+            }
+            
+        } catch (SQLException e) {
+            mensaje("Error al acceder a la tabla producto" + e.getMessage());
+        }
+        return false;
+    }
 }

@@ -5,11 +5,16 @@
  */
 package provemax54_vista;
 
+import provemax54_entidades.ProductoEntidades;
+import provemax54_entidades.ProveedorEntidades;
+
 /**
  *
  * @author Ideapad 5
  */
 public class CompraPorProveedor extends javax.swing.JInternalFrame {
+    ProveedorEntidades producto;
+    
 
     /**
      * Creates new form CompraPorProveedor
@@ -127,7 +132,7 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<¨ProveedorEntidades> jCProveedor;
+    private javax.swing.JComboBox<ProveedorEntidades> jCProveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -76,7 +76,7 @@ public class ProveedorEntidades {
 
     @Override
     public String toString() {
-        return "ProveedorEntidades{" + "idProveedor=" + idProveedor + ", razonSocial=" + razonSocial + ", domicilio=" + domicilio + ", telefono=" + telefono + ", estado=" + estado + '}';
+        return razonSocial;
     }
 
    

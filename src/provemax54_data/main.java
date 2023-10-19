@@ -30,7 +30,7 @@ public class main {
         ProductoEntidades galletas = new ProductoEntidades(2,"Don satur", "galletitas", 250, 2, true);
         ProductoEntidades lapiz = new ProductoEntidades(1, "Micros", " micro sd", 4000, 1, true);
         DetalleCompraData detalle = new DetalleCompraData();
-        DetalleCompraEntidades deta = new DetalleCompraEntidades(1, 100, compraE , lapiz, true);
+       // DetalleCompraEntidades deta = new DetalleCompraEntidades(1, 100, compraE , lapiz, true);
         
         ProveedorData proveedor = new ProveedorData();
         ProductoData producto = new ProductoData();
