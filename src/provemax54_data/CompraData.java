@@ -62,7 +62,8 @@ public class CompraData {
     public List<CompraEntidades> comprasProveedor(int idProveedor) {
 
         ArrayList<CompraEntidades> compra = new ArrayList<>();
-        CompraEntidades compraE = new CompraEntidades();
+        CompraEntidades compraE;
+        
 //        String sql = "SELECT COUNT(*) AS total_compras FROM compra WHERE idProveedor = ?";
         String sql = "SELECT * FROM `compra` WHERE idProveedor = ?";
 
@@ -71,11 +72,12 @@ public class CompraData {
             ps.setInt(1, idProveedor);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
+                compraE = new CompraEntidades();
                 compraE.setProveedor(proveedor.buscarPorID(rs.getInt("idProveedor")));
                 compraE.setIdCompra(rs.getInt("idCompra"));
                 compraE.setEstado(rs.getBoolean("estado"));
                 compraE.setFecha(rs.getDate("fecha").toLocalDate());
+               
 
                 compra.add(compraE);
             }
@@ -159,7 +161,7 @@ public class CompraData {
     public List<ProductoEntidades> stockMinimo(int stock) {
 
         ArrayList<ProductoEntidades> productos = new ArrayList<>();
-        ProductoEntidades prod = new ProductoEntidades();
+        ProductoEntidades prod;
         
        // String sql = "SELECT p.* FROM producto p JOIN detallecompra dc ON p.idProducto = dc.idProducto JOIN compra c ON dc.idCompra = c.idCompra WHERE p.estado = 1 AND p.stock < ?;";
        String sql = "SELECT * FROM producto  WHERE estado = 1 AND stock < ?;"; 
@@ -168,11 +170,13 @@ public class CompraData {
             ps.setInt(1, stock);
             ResultSet rs = ps.executeQuery();
             
-            while (rs.next()) {                
+            while (rs.next()) {      
+                prod = new ProductoEntidades();
                 prod.setDescripcion(rs.getString("descripcion"));
                 prod.setNombreProducto(rs.getString("nombreProducto"));
                 prod.setPrecioActual(rs.getDouble("precioActual"));
                 prod.setStock(rs.getInt("stock"));
+                prod.setEstado(rs.getBoolean("estado"));
                 
                 productos.add(prod);
             }
