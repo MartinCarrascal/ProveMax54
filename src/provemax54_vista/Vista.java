@@ -231,7 +231,7 @@ public class Vista extends javax.swing.JFrame {
     private void jMDetalleProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleProdActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        DetalleProductoVista vistaDetProd = new DetalleProductoVista();
+        DetalleProductoPorProveedorVista vistaDetProd = new DetalleProductoPorProveedorVista();
         vistaDetProd.setVisible(true);
         escritorio.add(vistaDetProd);
         escritorio.moveToFront(vistaDetProd);
