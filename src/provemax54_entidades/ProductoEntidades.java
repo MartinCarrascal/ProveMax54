@@ -16,6 +16,19 @@ public class ProductoEntidades {
     private double precioActual;
     private int stock;
     private boolean estado;
+    private int cantidad;
+
+ 
+
+    public ProductoEntidades(int idProducto, String nombreProducto, String descripcion, double precioActual, int stock, boolean estado, int cantidad) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
+        this.precioActual = precioActual;
+        this.stock = stock;
+        this.estado = estado;
+        this.cantidad = cantidad;
+    }
 
     public ProductoEntidades() {
     }
@@ -84,11 +97,21 @@ public class ProductoEntidades {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+    
+       public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 
     @Override
     public String toString() {
         return nombreProducto;
     }
+
+  
 
   
     

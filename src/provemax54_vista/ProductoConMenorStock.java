@@ -5,6 +5,14 @@
  */
 package provemax54_vista;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import provemax54_data.Conexion;
+
 /**
  *
  * @author Ideapad 5
@@ -34,7 +42,7 @@ public class ProductoConMenorStock extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
-        jSCantidadMinima = new javax.swing.JSpinner();
+        jTextField1 = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("PRODUCTO CON MENOR STOCK");
@@ -79,7 +87,11 @@ public class ProductoConMenorStock extends javax.swing.JInternalFrame {
             }
         });
 
-        jSCantidadMinima.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,8 +113,8 @@ public class ProductoConMenorStock extends javax.swing.JInternalFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(jSCantidadMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(155, 155, 155)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
                                 .addComponent(jBBuscar))
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
@@ -116,16 +128,16 @@ public class ProductoConMenorStock extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(81, 81, 81)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jSCantidadMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jBBuscar)))
-                .addGap(12, 12, 12)
+                .addGap(14, 14, 14)
                 .addComponent(jBLimpiar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jBSalir)
@@ -137,25 +149,78 @@ public class ProductoConMenorStock extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
+        consultarBaseDeDatos();
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
         // TODO add your handling code here:
+         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+         modelo.setRowCount(0); // Limpiar la tabla antes de llenarla con datos nuevos.
+         jTextField1.setText("");
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         // TODO add your handling code here:
+         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+        getToolkit().beep();
+        evt.consume();
+        
+   JOptionPane.showMessageDialog(rootPane, "Ingrese un número válido");
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
+private void consultarBaseDeDatos() {
+    int cantidadMinima = Integer.parseInt(jTextField1.getText());
+    
+  DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    modelo.setRowCount(0); // Limpiar la tabla antes de llenarla con datos nuevos.
+
+    Connection conn = Conexion.getConexion();
+    if (conn != null) {
+        try {
+            String consulta = "SELECT dc.idProducto, p.nombreProducto, p.descripcion, p.precioActual, p.stock FROM detallecompra dc "
+                    + "INNER JOIN producto p ON dc.idProducto = p.idProducto "
+                    + "WHERE p.stock < ?";
+            PreparedStatement cant = conn.prepareStatement(consulta);
+          cant.setInt(1, cantidadMinima);
+            ResultSet rs = cant.executeQuery();
+
+            while (rs.next()) {
+                modelo.addRow(new Object[]{
+                    rs.getInt("idProducto"),
+                    rs.getString("nombreProducto"),                   
+                    rs.getString("descripcion"),
+                    rs.getDouble("precioActual"),
+                    rs.getInt("stock")
+                });
+            }
+
+            rs.close();
+            cant.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    } else {
+        System.out.println("Error de conexión a la base de datos.");
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JSpinner jSCantidadMinima;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

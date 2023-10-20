@@ -5,6 +5,18 @@
  */
 package provemax54_vista;
 
+import java.beans.PropertyChangeEvent;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import provemax54_data.ProductoData;
+import provemax54_entidades.ProductoEntidades;
+
+//para el aviso de fecha 
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 /**
  *
  * @author Ideapad 5
@@ -14,8 +26,12 @@ public class ProductoMasComprado extends javax.swing.JInternalFrame {
     /**
      * Creates new form ProductoMasComprado
      */
+    private ProductoData prods; 
+    
     public ProductoMasComprado() {
         initComponents();
+        
+        
     }
 
     /**
@@ -57,6 +73,20 @@ public class ProductoMasComprado extends javax.swing.JInternalFrame {
             }
         });
 
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+                jDateChooser1PropertyChangeListener(evt);
+            }
+        });
+
+        jDateChooser2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser2PropertyChange(evt);
+                JDateChooser2PropertyChangeListener(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("de");
 
@@ -71,7 +101,7 @@ public class ProductoMasComprado extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id Producto", "Marca", "Descripcion", "Cantidad"
+                "Id Producto", "Marca", "Descripcion", "Total de Unidades Compradas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -145,17 +175,100 @@ public class ProductoMasComprado extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
+            Date fechaInicio = jDateChooser1.getDate();
+            Date fechaFin = jDateChooser2.getDate();
+
+
+ 
+    if (fechaInicio != null && fechaFin != null) {
+    // Convertir las fechas a java.sql.Date si es necesario
+//    java.sql.Date sqlFechaInicio = new java.sql.Date(fechaInicio.getTime());
+//    java.sql.Date sqlFechaFin = new java.sql.Date(fechaFin.getTime());
+
+    // Llamar a un método de ProductoData para buscar los productos más comprados entre las fechas
+    ProductoData productoData = new ProductoData();
+
+List<ProductoEntidades> productos = productoData.obtenerProductosMasComprados(fechaInicio, fechaFin);
+
+
+    // Llenar la tabla con los resultados
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+
+    for (ProductoEntidades producto : productos) {
+        model.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getCantidad()});
+    }
+} else {
+    // Muestra un mensaje de error si las fechas no están seleccionadas
+    JOptionPane.showMessageDialog(this, "Por favor, selecciona fechas válidas.");
+}
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
         // TODO add your handling code here:
+         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+         modelo.setRowCount(0); // Limpiar la tabla antes de llenarla con datos nuevos.
+         jDateChooser1.setDate(null);
+         jDateChooser2.setDate(null);
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jDateChooser2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser2PropertyChange
+        
+    }//GEN-LAST:event_jDateChooser2PropertyChange
 
+    private void JDateChooser2PropertyChangeListener(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JDateChooser2PropertyChangeListener
+       jDateChooser2.addPropertyChangeListener(new PropertyChangeListener() {
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("date".equals(evt.getPropertyName())) {
+            Date selectedDate = jDateChooser2.getDate();
+            
+            if (selectedDate != null) {
+                Date currentDate = new Date(); // Fecha actual
+                  if (selectedDate.after(currentDate)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada supera la fecha actual.");
+//                jDateChooser2.setDate(currentDate); // Establece la fecha actual en el JDateChooser 
+                jDateChooser2.setDate(null); //o borro la fecha selecciona 
+            }
+            }          
+        }
+    }
+});
+        
+    }//GEN-LAST:event_JDateChooser2PropertyChangeListener
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void jDateChooser1PropertyChangeListener(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChangeListener
+        // TODO add your handling code here:
+              jDateChooser1.addPropertyChangeListener(new PropertyChangeListener() {
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("date".equals(evt.getPropertyName())) {
+            Date selectedDate = jDateChooser1.getDate();
+            
+            if (selectedDate != null) {
+                Date currentDate = new Date(); // Fecha actual
+                  if (selectedDate.after(currentDate)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada supera la fecha actual.");
+                jDateChooser1.setDate(null);
+            }
+            }          
+        }
+    }
+});
+    }//GEN-LAST:event_jDateChooser1PropertyChangeListener
+
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBLimpiar;

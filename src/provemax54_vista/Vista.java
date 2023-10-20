@@ -39,6 +39,10 @@ public class Vista extends javax.swing.JFrame {
         jMDetalleComp = new javax.swing.JMenuItem();
         jMDetalleProducto = new javax.swing.JMenu();
         jMDetalleProd = new javax.swing.JMenuItem();
+        jStock = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMasComprado = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMCompra = new javax.swing.JMenu();
         jMCargarCompra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -137,6 +141,40 @@ public class Vista extends javax.swing.JFrame {
         jMDetalleProducto.add(jMDetalleProd);
 
         jMenu3.add(jMDetalleProducto);
+
+        jStock.setText("Buscar productos con el menor Stock");
+        jStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jStockActionPerformed(evt);
+            }
+        });
+
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jStock.add(jMenuItem2);
+
+        jMenu3.add(jStock);
+
+        jMasComprado.setText("Producto Mas Comprado");
+        jMasComprado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMasCompradoActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMasComprado.add(jMenuItem1);
+
+        jMenu3.add(jMasComprado);
 
         jMenuBar1.add(jMenu3);
 
@@ -250,6 +288,32 @@ public class Vista extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMSalirActionPerformed
 
+    private void jStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStockActionPerformed
+        
+    }//GEN-LAST:event_jStockActionPerformed
+
+    private void jMasCompradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMasCompradoActionPerformed
+         
+    }//GEN-LAST:event_jMasCompradoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+          escritorio.removeAll();
+        escritorio.repaint();
+       ProductoMasComprado comprado = new ProductoMasComprado();
+     comprado.setVisible(true);
+        escritorio.add(comprado);
+        escritorio.moveToFront(comprado);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ProductoConMenorStock stockVista = new ProductoConMenorStock();
+       stockVista.setVisible(true);
+        escritorio.add(stockVista);
+        escritorio.moveToFront(stockVista);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,9 +362,13 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenu jMDetalleProducto;
     private javax.swing.JMenu jMProducto;
     private javax.swing.JMenuItem jMSalir;
+    private javax.swing.JMenu jMasComprado;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu jStock;
     // End of variables declaration//GEN-END:variables
 }

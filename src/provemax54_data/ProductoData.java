@@ -5,16 +5,18 @@
  */
 package provemax54_data;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import provemax54_entidades.ProductoEntidades;
-import provemax54_entidades.ProveedorEntidades;
+
 
 /**
  *
@@ -195,4 +197,54 @@ public class ProductoData {
         }
         return false;
     }
+         
+public List<ProductoEntidades> obtenerProductosMasComprados(Date fechaInicio, Date fechaFin) {
+    List<ProductoEntidades> productos = new ArrayList<>();
+
+    String sql = "SELECT p.idProducto, p.nombreProducto, p.descripcion, SUM(dc.cantidad) AS totalUnidadesCompradas " +
+"FROM producto p " +
+"INNER JOIN detallecompra dc ON p.idProducto = dc.idProducto " +
+"INNER JOIN compra c ON c.idCompra = dc.idCompra " +
+"WHERE c.fecha BETWEEN ? AND ? " +
+"GROUP BY p.idProducto, p.nombreProducto, p.descripcion " +
+"ORDER BY totalUnidadesCompradas DESC ";
+               
+                 
+
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setDate(1, new java.sql.Date(fechaInicio.getTime()));
+        ps.setDate(2, new java.sql.Date(fechaFin.getTime()));
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idProducto = rs.getInt("idProducto");
+            String nombreProducto = rs.getString("nombreProducto");
+            String descripcion = rs.getString("descripcion");
+           int cantidad = rs.getInt("totalUnidadesCompradas");
+           
+
+            // Crear un objeto ProductoEntidades con los datos obtenidos
+            ProductoEntidades producto = new ProductoEntidades();
+          
+            producto.setIdProducto(idProducto);
+            producto.setNombreProducto(nombreProducto);
+            producto.setDescripcion(descripcion);
+            producto.setCantidad(cantidad); //agregue constructor getter and setter en ProductoEntidades para que pueda obtener la suma de totalUnidadesCompradas
+            
+
+            productos.add(producto);
+            
+        }
+
+        ps.close();
+        rs.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Manejo de errores
+    }
+
+    return productos;
+}
 }
