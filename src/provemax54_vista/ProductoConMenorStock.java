@@ -185,9 +185,9 @@ private void consultarBaseDeDatos() {
     Connection conn = Conexion.getConexion();
     if (conn != null) {
         try {
-            String consulta = "SELECT dc.idProducto, p.nombreProducto, p.descripcion, p.precioActual, p.stock FROM detallecompra dc "
-                    + "INNER JOIN producto p ON dc.idProducto = p.idProducto "
-                    + "WHERE p.stock < ?";
+            String consulta = "SELECT idProducto, nombreProducto, descripcion, precioActual, stock FROM producto "
+                  
+                    + "WHERE stock < ?";
             PreparedStatement cant = conn.prepareStatement(consulta);
           cant.setInt(1, cantidadMinima);
             ResultSet rs = cant.executeQuery();
