@@ -36,13 +36,15 @@ public class Vista extends javax.swing.JFrame {
         jMCargarProducto = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMDetalleCompra = new javax.swing.JMenu();
-        jMDetalleComp = new javax.swing.JMenuItem();
+        jMDetalleDeCompra = new javax.swing.JMenuItem();
         jMDetalleProducto = new javax.swing.JMenu();
-        jMDetalleProd = new javax.swing.JMenuItem();
+        jMDetalleProductoPorProveedor = new javax.swing.JMenuItem();
+        jMDCompraPorProveedor = new javax.swing.JMenu();
+        jMCompraPorProveedor = new javax.swing.JMenuItem();
         jStock = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMasComprado = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMProductoConMenorStock = new javax.swing.JMenuItem();
+        jMProdMasComprado = new javax.swing.JMenu();
+        jMProductoMasComprado = new javax.swing.JMenuItem();
         jMCompra = new javax.swing.JMenu();
         jMCargarCompra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -117,64 +119,84 @@ public class Vista extends javax.swing.JFrame {
         jMDetalleCompra.setText("Detalle Compra");
         jMDetalleCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        jMDetalleComp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        jMDetalleComp.setText("Detalle Compra");
-        jMDetalleComp.addActionListener(new java.awt.event.ActionListener() {
+        jMDetalleDeCompra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMDetalleDeCompra.setText("Detalle Compra");
+        jMDetalleDeCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMDetalleCompActionPerformed(evt);
+                jMDetalleDeCompraActionPerformed(evt);
             }
         });
-        jMDetalleCompra.add(jMDetalleComp);
+        jMDetalleCompra.add(jMDetalleDeCompra);
 
         jMenu3.add(jMDetalleCompra);
 
-        jMDetalleProducto.setText("Detalle Producto");
+        jMDetalleProducto.setText("Detalle Producto Por Proveedor");
         jMDetalleProducto.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        jMDetalleProd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
-        jMDetalleProd.setText("Detalle Producto");
-        jMDetalleProd.addActionListener(new java.awt.event.ActionListener() {
+        jMDetalleProductoPorProveedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        jMDetalleProductoPorProveedor.setText("Detalle Producto Por Proveedor");
+        jMDetalleProductoPorProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMDetalleProdActionPerformed(evt);
+                jMDetalleProductoPorProveedorActionPerformed(evt);
             }
         });
-        jMDetalleProducto.add(jMDetalleProd);
+        jMDetalleProducto.add(jMDetalleProductoPorProveedor);
 
         jMenu3.add(jMDetalleProducto);
 
-        jStock.setText("Buscar productos con el menor Stock");
+        jMDCompraPorProveedor.setText("Compra Por Proveedor");
+        jMDCompraPorProveedor.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jMDCompraPorProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMDCompraPorProveedorActionPerformed(evt);
+            }
+        });
+
+        jMCompraPorProveedor.setText("Compra Por Proveedor");
+        jMCompraPorProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCompraPorProveedorActionPerformed(evt);
+            }
+        });
+        jMDCompraPorProveedor.add(jMCompraPorProveedor);
+
+        jMenu3.add(jMDCompraPorProveedor);
+
+        jStock.setText("Buscar productos Producto Con Menor Stock");
+        jStock.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jStockActionPerformed(evt);
             }
         });
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMProductoConMenorStock.setText("Buscar Producto con Menor Stock");
+        jMProductoConMenorStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMProductoConMenorStockActionPerformed(evt);
             }
         });
-        jStock.add(jMenuItem2);
+        jStock.add(jMProductoConMenorStock);
 
         jMenu3.add(jStock);
 
-        jMasComprado.setText("Producto Mas Comprado");
-        jMasComprado.addActionListener(new java.awt.event.ActionListener() {
+        jMProdMasComprado.setText("Buscar Producto Mas Comprado");
+        jMProdMasComprado.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jMProdMasComprado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMasCompradoActionPerformed(evt);
+                jMProdMasCompradoActionPerformed(evt);
             }
         });
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMProductoMasComprado.setText("Buscar producto Mas Comprado");
+        jMProductoMasComprado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMProductoMasCompradoActionPerformed(evt);
             }
         });
-        jMasComprado.add(jMenuItem1);
+        jMProdMasComprado.add(jMProductoMasComprado);
 
-        jMenu3.add(jMasComprado);
+        jMenu3.add(jMProdMasComprado);
 
         jMenuBar1.add(jMenu3);
 
@@ -232,14 +254,14 @@ public class Vista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JMProveedorActionPerformed
 
-    private void jMDetalleCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleCompActionPerformed
+    private void jMDetalleDeCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleDeCompraActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         DetalleCompraVista vistaDetCom = new DetalleCompraVista();
         vistaDetCom.setVisible(true);
         escritorio.add(vistaDetCom);
         escritorio.moveToFront(vistaDetCom);
-    }//GEN-LAST:event_jMDetalleCompActionPerformed
+    }//GEN-LAST:event_jMDetalleDeCompraActionPerformed
 
 
     private void jMCargarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarProveedorActionPerformed
@@ -266,14 +288,14 @@ public class Vista extends javax.swing.JFrame {
         escritorio.moveToFront(vistaCom);
     }//GEN-LAST:event_jMCargarCompraActionPerformed
 
-    private void jMDetalleProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleProdActionPerformed
+    private void jMDetalleProductoPorProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDetalleProductoPorProveedorActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         DetalleProductoPorProveedorVista vistaDetProd = new DetalleProductoPorProveedorVista();
         vistaDetProd.setVisible(true);
         escritorio.add(vistaDetProd);
         escritorio.moveToFront(vistaDetProd);
-    }//GEN-LAST:event_jMDetalleProdActionPerformed
+    }//GEN-LAST:event_jMDetalleProductoPorProveedorActionPerformed
 
     private void jMCargarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargarProductoActionPerformed
         escritorio.removeAll();
@@ -289,30 +311,43 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_jMSalirActionPerformed
 
     private void jStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStockActionPerformed
-        
+
     }//GEN-LAST:event_jStockActionPerformed
 
-    private void jMasCompradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMasCompradoActionPerformed
-         
-    }//GEN-LAST:event_jMasCompradoActionPerformed
+    private void jMProdMasCompradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProdMasCompradoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-          escritorio.removeAll();
+    }//GEN-LAST:event_jMProdMasCompradoActionPerformed
+
+    private void jMProductoMasCompradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProductoMasCompradoActionPerformed
+        escritorio.removeAll();
         escritorio.repaint();
-       ProductoMasComprado comprado = new ProductoMasComprado();
-     comprado.setVisible(true);
+        ProductoMasComprado comprado = new ProductoMasComprado();
+        comprado.setVisible(true);
         escritorio.add(comprado);
         escritorio.moveToFront(comprado);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMProductoMasCompradoActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMProductoConMenorStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMProductoConMenorStockActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
         ProductoConMenorStock stockVista = new ProductoConMenorStock();
-       stockVista.setVisible(true);
+        stockVista.setVisible(true);
         escritorio.add(stockVista);
         escritorio.moveToFront(stockVista);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMProductoConMenorStockActionPerformed
+
+    private void jMCompraPorProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCompraPorProveedorActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        CompraPorProveedor comProV = new CompraPorProveedor();
+        comProV.setVisible(true);
+        escritorio.add(comProV);
+        escritorio.moveToFront(comProV);
+    }//GEN-LAST:event_jMCompraPorProveedorActionPerformed
+
+    private void jMDCompraPorProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMDCompraPorProveedorActionPerformed
+
+    }//GEN-LAST:event_jMDCompraPorProveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,19 +391,21 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMCargarProducto;
     private javax.swing.JMenuItem jMCargarProveedor;
     private javax.swing.JMenu jMCompra;
-    private javax.swing.JMenuItem jMDetalleComp;
+    private javax.swing.JMenuItem jMCompraPorProveedor;
+    private javax.swing.JMenu jMDCompraPorProveedor;
     private javax.swing.JMenu jMDetalleCompra;
-    private javax.swing.JMenuItem jMDetalleProd;
+    private javax.swing.JMenuItem jMDetalleDeCompra;
     private javax.swing.JMenu jMDetalleProducto;
+    private javax.swing.JMenuItem jMDetalleProductoPorProveedor;
+    private javax.swing.JMenu jMProdMasComprado;
     private javax.swing.JMenu jMProducto;
+    private javax.swing.JMenuItem jMProductoConMenorStock;
+    private javax.swing.JMenuItem jMProductoMasComprado;
     private javax.swing.JMenuItem jMSalir;
-    private javax.swing.JMenu jMasComprado;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jStock;
     // End of variables declaration//GEN-END:variables
 }
