@@ -206,7 +206,8 @@ private void consultarBaseDeDatos() {
             cant.close();
             
         } catch (SQLException e) {
-            e.printStackTrace();
+           // e.printStackTrace(); 
+           JOptionPane.showMessageDialog(this, "no se pudo acceder " + e.getMessage());
         } 
     } else {
         System.out.println("Error de conexión a la base de datos.");

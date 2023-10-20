@@ -93,6 +93,10 @@ public class CompraEntidades {
     public String toString() {
         return "CompraEntidades{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + ", estado=" + estado + ", listaDetalleCompra=" + listaDetalleCompra + '}';
     }
+    
+    public void remuveDetalleCompra(int index) {
+        listaDetalleCompra.remove(index);
+    }
 
   
 }
