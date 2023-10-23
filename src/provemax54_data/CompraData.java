@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import provemax54_entidades.CompraEntidades;
 import provemax54_entidades.ProductoEntidades;
+import provemax54_entidades.ProveedorEntidades;
 
 /**
  *
@@ -188,6 +189,31 @@ public class CompraData {
         return productos;
     }
     
+    public List<ProveedorEntidades> proveedoresPorProducto(String nombre) {
+         ArrayList<ProveedorEntidades> proveedores = new ArrayList<>();
+         ProveedorEntidades provE;
+        
+        String sql = "SELECT DISTINCT proveedor.* FROM proveedor JOIN compra ON proveedor.idProveedor = compra.idProveedor JOIN detallecompra ON compra.idCompra = detallecompra.idCompra JOIN producto ON detallecompra.idProducto = producto.idProducto WHERE producto.nombreProducto = ?";
+        
+         try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {    
+                provE = new ProveedorEntidades();
+                
+                provE.setRazonSocial(rs.getString("razonSocial"));
+                provE.setDomicilio(rs.getString("domicilio"));
+                provE.setTelefono(rs.getString("telefono"));
+                
+                proveedores.add(provE);
+            }
+            
+        } catch (Exception e) {
+            mensaje("Error al acceder a la tabla " + e.getMessage());
+        }
+        return proveedores;
+    }
    
 
 }
