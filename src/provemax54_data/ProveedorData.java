@@ -71,8 +71,8 @@ public class ProveedorData {
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
-            ps.setBoolean(5, proveedor.isEstado());
-//            ps.setInt(5, proveedor.getIdProveedor());
+ //           ps.setBoolean(4, proveedor.isEstado());
+          ps.setInt(4, proveedor.getIdProveedor());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

@@ -8,6 +8,7 @@ package provemax54_vista;
 import java.awt.Font;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import jdk.nashorn.internal.runtime.regexp.joni.Option;
+import provemax54_data.CompraData;
+import provemax54_data.DetalleCompraData;
 import provemax54_data.ProductoData;
 import provemax54_data.ProveedorData;
 import provemax54_entidades.CompraEntidades;
@@ -41,10 +44,13 @@ public class CompraVista extends javax.swing.JInternalFrame {
     private ProveedorData pd;
     private ProductoEntidades prodSeleccionado;
     private ProductoData produ;
+    private CompraData comD;
     private DefaultTableModel modelo;
     private List<DetalleCompraEntidades> detalles;
     private CompraEntidades compra;
     private DetalleCompraEntidades detalleSeleccionado;
+    private DetalleCompraData detalleD;
+    
 
     /**
      * Creates new form CompraVista
@@ -53,7 +59,9 @@ public class CompraVista extends javax.swing.JInternalFrame {
         compra = new CompraEntidades();
         pd = new ProveedorData();
         produ = new ProductoData();
-        
+        comD = new CompraData();
+        detalleD = new DetalleCompraData();
+        detalles = new ArrayList<>();
         initComponents();
         jDFecha.setDateFormatString("dd MMMM yyyy");
         jDFecha.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
@@ -437,7 +445,17 @@ public class CompraVista extends javax.swing.JInternalFrame {
         }
     }
     private void jBGuardarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCompraActionPerformed
-        // TODO add your handling code here:
+      compra = new CompraEntidades(provSeleccionado, jDFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
+      compra.setListaDetalleCompra(detalles);
+        CompraEntidades comp = comD.guardarCompra(compra);
+      
+        for (DetalleCompraEntidades com : comp.getListaDetalleCompra() ) {
+              com.setIdCompra(comp.getIdCompra());
+              detalleD.guardarDetalleCompra(com);
+        }
+      
+        modelo.setRowCount(0);
+        
     }//GEN-LAST:event_jBGuardarCompraActionPerformed
 
     private void jCProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCProductoActionPerformed
@@ -452,7 +470,8 @@ public class CompraVista extends javax.swing.JInternalFrame {
         
         if (produ.consultarStock(prodSeleccionado.getIdProducto(), (int) jSCantidad.getValue())&&(int)jSCantidad.getValue()>0) {
             DetalleCompraEntidades detalle = new DetalleCompraEntidades(0, prodSeleccionado, (int)jSCantidad.getValue(), prodSeleccionado.getPrecioActual());
-                compra.addListaDetalleCompra(detalle);
+               // compra.addListaDetalleCompra(detalle);
+                detalles.add(detalle);
                 modelo.addRow(new Object[]{prodSeleccionado.getNombreProducto(),prodSeleccionado.getDescripcion(),jSCantidad.getValue(),prodSeleccionado.getPrecioActual(),detalle.devolverSubtotal(),detalle});
               jTTotal.setText(""+ compra.devolverTotal() );
               table.setRowSelectionInterval(0, 0);

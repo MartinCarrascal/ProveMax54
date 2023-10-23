@@ -57,8 +57,9 @@ public class CompraData {
         }
         return compra;
     }
+    
 
-    //Todas las compras a un Proveedor 
+    // 2 Todas las compras a un Proveedor 
     public List<CompraEntidades> comprasProveedor(int idProveedor) {
 
         ArrayList<CompraEntidades> compra = new ArrayList<>();
@@ -110,7 +111,7 @@ public class CompraData {
         }
     }
 
-    // Todos los productos de una fecha / todos los productos de una compra en particular
+    // 1 y 3 Todos los productos de una fecha / todos los productos de una compra en particular
     public List<ProductoEntidades> compraPorFecha(Date fecha) {
 
         ArrayList<ProductoEntidades> productos = new ArrayList<>();
@@ -138,7 +139,7 @@ public class CompraData {
         return productos;
     }
 
-    // Productos mas comprados entre dos fechas
+    //5 Productos mas comprados entre dos fechas
     public List<String[]> productoEntreFechas(Date fecha1, Date fecha2) {
         List<String[]> productos = new ArrayList<>();
         String sql = "SELECT p.descripcion, SUM(d.cantidad) AS cantidadT FROM compra c JOIN detallecompra d USING(idCompra) JOIN producto p USING (idProducto) WHERE c.fecha BETWEEN ? AND ? GROUP BY  d.idProducto ORDER BY cantidad DESC;";
@@ -157,7 +158,7 @@ public class CompraData {
         return productos;
     }
     
-   // Productos por debajo del stock 
+   // 5 Productos por debajo del stock 
     public List<ProductoEntidades> stockMinimo(int stock) {
 
         ArrayList<ProductoEntidades> productos = new ArrayList<>();

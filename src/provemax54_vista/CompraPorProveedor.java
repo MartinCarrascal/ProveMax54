@@ -5,6 +5,10 @@
  */
 package provemax54_vista;
 
+import javax.swing.table.DefaultTableModel;
+import provemax54_data.CompraData;
+import provemax54_data.ProveedorData;
+import provemax54_entidades.CompraEntidades;
 import provemax54_entidades.ProductoEntidades;
 import provemax54_entidades.ProveedorEntidades;
 
@@ -13,14 +17,22 @@ import provemax54_entidades.ProveedorEntidades;
  * @author Ideapad 5
  */
 public class CompraPorProveedor extends javax.swing.JInternalFrame {
-    ProveedorEntidades producto;
-    
+    ProveedorEntidades proveedor;
+    ProveedorData proveD;
+    CompraData compraD;
+    private DefaultTableModel modelo;
+    private ProveedorEntidades proveedorSeleccionado;
 
     /**
      * Creates new form CompraPorProveedor
      */
     public CompraPorProveedor() {
+        modelo = new DefaultTableModel();
+        proveD = new ProveedorData();
+        compraD = new CompraData();
         initComponents();
+        armarCabecera();
+        cargarCombo();
     }
 
     /**
@@ -129,6 +141,27 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void armarCabecera() {
+        modelo.addColumn("Fecha de Compra");
+        jTable1.setModel(modelo);
+    }
+    
+    private void cargarCombo() {
+        jCProveedor.removeAllItems();
+        
+        for (ProveedorEntidades prov: proveD.listarProveedor()) {
+            jCProveedor.addItem(prov);
+        }
+        if (jCProveedor.getItemCount() >0) {
+            proveedorSeleccionado = (ProveedorEntidades)jCProveedor.getSelectedItem();
+            
+        }
+    }
+    
+    private void cargarDatos() {
+        
+        modelo.addRow(new Object[]{});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSalir;

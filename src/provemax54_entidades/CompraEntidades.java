@@ -88,6 +88,12 @@ public class CompraEntidades {
         }
         return total;
     }
+
+    public void setListaDetalleCompra(List<DetalleCompraEntidades> listaDetalleCompra) {
+        this.listaDetalleCompra = listaDetalleCompra;
+    }
+    
+    
  
     @Override
     public String toString() {
