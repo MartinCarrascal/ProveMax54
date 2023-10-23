@@ -127,7 +127,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jBCargarProd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
         jBGuardarCompra = new javax.swing.JButton();
         jBEliminarProd = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -211,8 +211,13 @@ public class CompraVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton2.setText("Salir");
+        jBSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         jBGuardarCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBGuardarCompra.setText("Guardar Compra");
@@ -304,7 +309,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
                 .addGap(244, 244, 244)
                 .addComponent(jBGuardarCompra)
                 .addGap(188, 188, 188)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(61, 61, 61))
@@ -392,7 +397,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jBGuardarCompra)
-                            .addComponent(jButton2))
+                            .addComponent(jBSalir))
                         .addGap(108, 108, 108))))
         );
 
@@ -471,6 +476,10 @@ public class CompraVista extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
     private boolean existeProducto(String descProd) {
         
         for (int i = 0; i < table.getRowCount(); i++) {
@@ -542,8 +551,8 @@ public class CompraVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBCargarProd;
     private javax.swing.JButton jBEliminarProd;
     private javax.swing.JButton jBGuardarCompra;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<ProductoEntidades> jCProducto;
     private javax.swing.JComboBox<ProveedorEntidades> jCProveedor;
     private com.toedter.calendar.JCalendar jCalendar1;
