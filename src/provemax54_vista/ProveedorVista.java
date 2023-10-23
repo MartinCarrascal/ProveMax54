@@ -93,6 +93,11 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         jTTelefono.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jTTelefono.setEnabled(false);
+        jTTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTTelefonoKeyTyped(evt);
+            }
+        });
 
         jBGuardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBGuardar.setText("Guardar");
@@ -438,6 +443,19 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jTIdProveedor.setEnabled(true);
 
     }//GEN-LAST:event_jBCancelarActionPerformed
+
+    private void jTTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTelefonoKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        
+        if (Character.isLetter(key)) {
+                getToolkit().beep();
+        evt.consume();
+        
+   JOptionPane.showMessageDialog(rootPane, "Ingrese un número de teléfono válido");
+        }
+        
+    }//GEN-LAST:event_jTTelefonoKeyTyped
 
     private void limpiar() {
         jTIdProveedor.setText(title);
