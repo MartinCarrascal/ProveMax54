@@ -154,6 +154,7 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
         }
         if (jCProveedor.getItemCount() >0) {
             proveedorSeleccionado = (ProveedorEntidades)jCProveedor.getSelectedItem();
+            // borren 
             
         }
     }
