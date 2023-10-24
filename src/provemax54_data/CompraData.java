@@ -214,6 +214,34 @@ public class CompraData {
         }
         return proveedores;
     }
+    
+     public List<CompraEntidades> ultimaCompra() {
+         ArrayList<CompraEntidades> compras = new ArrayList<>();
+         CompraEntidades comp;
+        
+        String sql = "SELECT * FROM compra ORDER BY fecha DESC";
+        
+         try(PreparedStatement ps = connection.prepareStatement(sql)) {
+           
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {    
+                comp = new CompraEntidades();
+                
+                comp.setIdCompra(rs.getInt("idCompra"));
+              comp.setProveedor(proveedor.buscarPorID(rs.getInt("idProveedor")));
+               
+                comp.setFecha(rs.getDate("fecha").toLocalDate());
+                
+                compras.add(comp);
+                
+            }
+            
+        } catch (Exception e) {
+            mensaje("Error al acceder a la tabla " + e.getMessage());
+        }
+        return compras;
+    }
    
 
 }

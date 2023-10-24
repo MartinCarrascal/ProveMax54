@@ -45,6 +45,8 @@ public class Vista extends javax.swing.JFrame {
         jMProductoConMenorStock = new javax.swing.JMenuItem();
         jMProdMasComprado = new javax.swing.JMenu();
         jMProductoMasComprado = new javax.swing.JMenuItem();
+        jMUltimaCompra = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMCompra = new javax.swing.JMenu();
         jMCargarCompra = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -198,6 +200,38 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu3.add(jMProdMasComprado);
 
+        jMUltimaCompra.setText("ULTIMAS COMPRAS");
+        jMUltimaCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jMUltimaCompra.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jMUltimaCompraComponentAdded(evt);
+            }
+        });
+        jMUltimaCompra.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMUltimaCompraMenuSelected(evt);
+            }
+        });
+        jMUltimaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMUltimaCompraActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Ultima compra");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMUltimaCompra.add(jMenuItem1);
+
+        jMenu3.add(jMUltimaCompra);
+
         jMenuBar1.add(jMenu3);
 
         jMCompra.setText("COMPRA");
@@ -349,6 +383,27 @@ public class Vista extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMDCompraPorProveedorActionPerformed
 
+    private void jMUltimaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMUltimaCompraActionPerformed
+      
+    }//GEN-LAST:event_jMUltimaCompraActionPerformed
+
+    private void jMUltimaCompraMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMUltimaCompraMenuSelected
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMUltimaCompraMenuSelected
+
+    private void jMUltimaCompraComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jMUltimaCompraComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMUltimaCompraComponentAdded
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        UltimaCompraVista comProV = new UltimaCompraVista();
+        comProV.setVisible(true);
+        escritorio.add(comProV);
+        escritorio.moveToFront(comProV);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,10 +457,12 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMProductoConMenorStock;
     private javax.swing.JMenuItem jMProductoMasComprado;
     private javax.swing.JMenuItem jMSalir;
+    private javax.swing.JMenu jMUltimaCompra;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jStock;
     // End of variables declaration//GEN-END:variables
 }
