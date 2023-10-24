@@ -101,7 +101,7 @@ public class ProductoMasComprado extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id Producto", "Marca", "Descripcion", "Total de Unidades Compradas"
+                "Id Producto", "Nombre Producto", "Descripcion", "Total de Unidades Compradas"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

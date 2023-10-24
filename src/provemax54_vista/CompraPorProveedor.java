@@ -152,7 +152,7 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jCProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCProveedorActionPerformed

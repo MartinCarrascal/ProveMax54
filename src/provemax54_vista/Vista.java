@@ -162,7 +162,7 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu3.add(jMDCompraPorProveedor);
 
-        jStock.setText("Buscar productos Producto Con Menor Stock");
+        jStock.setText("Buscar Producto Con Menor Stock");
         jStock.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

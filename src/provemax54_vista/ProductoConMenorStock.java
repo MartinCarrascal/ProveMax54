@@ -177,11 +177,20 @@ public class ProductoConMenorStock extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1KeyTyped
 
 private void consultarBaseDeDatos() {
-    int cantidadMinima = Integer.parseInt(jTextField1.getText());
+    
+    int cantidadMinima;
+         String input = jTextField1.getText();
+
+        // Validar que input sea un número y tenga hasta 4 caracteres.      
+        if (input.matches("\\d{1,4}")) { 
+    
+    
+    cantidadMinima = Integer.parseInt(jTextField1.getText());
     
   DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
     modelo.setRowCount(0); // Limpiar la tabla antes de llenarla con datos nuevos.
-
+  
+    
     Connection conn = Conexion.getConexion();
     if (conn != null) {
         try {
@@ -212,6 +221,9 @@ private void consultarBaseDeDatos() {
     } else {
         System.out.println("Error de conexión a la base de datos.");
     }
+    } else {
+            JOptionPane.showMessageDialog(null, "El número de stock no debe superar los cuatro dígitos");
+        }
 }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

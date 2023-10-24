@@ -141,7 +141,7 @@
             </Menu>
             <Menu class="javax.swing.JMenu" name="jStock">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar productos Producto Con Menor Stock"/>
+                <Property name="text" type="java.lang.String" value="Buscar Producto Con Menor Stock"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>

@@ -192,7 +192,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Marca", "Descripcion", "Cantidad", "Precio Unit.", "SubTotal", "Producto"
+                "Nombre Producto", "Descripcion", "Cantidad", "Precio Unit.", "SubTotal", "Producto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -453,7 +453,9 @@ public class CompraVista extends javax.swing.JInternalFrame {
     //  compra = new CompraEntidades(provSeleccionado, jDFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
      // compra.setListaDetalleCompra(detalles);
      compra.setProveedor(provSeleccionado);
+        try {            
      compra.setFecha( jDFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+      
      compra.setEstado(true);
         CompraEntidades comp = comD.guardarCompra(compra);
       
@@ -461,7 +463,9 @@ public class CompraVista extends javax.swing.JInternalFrame {
               com.setIdCompra(comp.getIdCompra());
               detalleD.guardarDetalleCompra(com);
         }
-      
+       } catch (Exception e) {
+           JOptionPane.showMessageDialog(null,"Ingrese una fecha válida"+ e.getMessage());
+        }
         modelo.setRowCount(0);
         compra.getListaDetalleCompra().clear();
         jTTotal.setText("0.00");
