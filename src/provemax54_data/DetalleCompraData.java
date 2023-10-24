@@ -47,7 +47,7 @@ public class DetalleCompraData {
 
             if (rs.next()) {
                 detalleCompra.setIdDetalle(rs.getInt(1));
-                mensaje("Se agregó el producto exitosamente ");
+               // mensaje("Se agregó el producto exitosamente ");
                 ps.close();
                 rs.close();
 

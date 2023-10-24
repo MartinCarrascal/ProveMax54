@@ -228,7 +228,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
         });
 
         jBGuardarCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jBGuardarCompra.setText("Guardar Compra");
+        jBGuardarCompra.setText("Guardar");
         jBGuardarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarCompraActionPerformed(evt);
@@ -450,8 +450,11 @@ public class CompraVista extends javax.swing.JInternalFrame {
         }
     }
     private void jBGuardarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCompraActionPerformed
-      compra = new CompraEntidades(provSeleccionado, jDFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
-      compra.setListaDetalleCompra(detalles);
+    //  compra = new CompraEntidades(provSeleccionado, jDFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
+     // compra.setListaDetalleCompra(detalles);
+     compra.setProveedor(provSeleccionado);
+     compra.setFecha( jDFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+     compra.setEstado(true);
         CompraEntidades comp = comD.guardarCompra(compra);
       
         for (DetalleCompraEntidades com : comp.getListaDetalleCompra() ) {
@@ -460,7 +463,8 @@ public class CompraVista extends javax.swing.JInternalFrame {
         }
       
         modelo.setRowCount(0);
-        
+        compra.getListaDetalleCompra().clear();
+        jTTotal.setText("0.00");
     }//GEN-LAST:event_jBGuardarCompraActionPerformed
 
     private void jCProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCProductoActionPerformed
@@ -475,8 +479,8 @@ public class CompraVista extends javax.swing.JInternalFrame {
         
         if (produ.consultarStock(prodSeleccionado.getIdProducto(), (int) jSCantidad.getValue())&&(int)jSCantidad.getValue()>0) {
             DetalleCompraEntidades detalle = new DetalleCompraEntidades(0, prodSeleccionado, (int)jSCantidad.getValue(), prodSeleccionado.getPrecioActual());
-               // compra.addListaDetalleCompra(detalle);
-                detalles.add(detalle);
+               compra.addListaDetalleCompra(detalle);
+               // detalles.add(detalle);
                 modelo.addRow(new Object[]{prodSeleccionado.getNombreProducto(),prodSeleccionado.getDescripcion(),jSCantidad.getValue(),prodSeleccionado.getPrecioActual(),detalle.devolverSubtotal(),detalle});
               jTTotal.setText(""+ compra.devolverTotal() );
               table.setRowSelectionInterval(0, 0);

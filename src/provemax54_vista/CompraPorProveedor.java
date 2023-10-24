@@ -5,6 +5,7 @@
  */
 package provemax54_vista;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import provemax54_data.CompraData;
 import provemax54_data.ProveedorData;
@@ -20,6 +21,7 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
     ProveedorEntidades proveedor;
     ProveedorData proveD;
     CompraData compraD;
+   private List<CompraEntidades> compras;
     private DefaultTableModel modelo;
     private ProveedorEntidades proveedorSeleccionado;
 
@@ -33,6 +35,7 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarCombo();
+        
     }
 
     /**
@@ -57,21 +60,32 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
         jLabel1.setText("COMPRA POR PROVEEDOR");
 
         jCProveedor.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jCProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCProveedorActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Buscar Proveedor");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Fecha de Compra"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jBSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -141,6 +155,12 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jCProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCProveedorActionPerformed
+        proveedorSeleccionado = (ProveedorEntidades)jCProveedor.getSelectedItem();
+        llenarTabla();
+        jTotalCompras.setText("" + compras.size());
+    }//GEN-LAST:event_jCProveedorActionPerformed
+
     private void armarCabecera() {
         modelo.addColumn("Fecha de Compra");
         jTable1.setModel(modelo);
@@ -159,9 +179,14 @@ public class CompraPorProveedor extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargarDatos() {
-        
-        modelo.addRow(new Object[]{});
+    private void llenarTabla() {
+          modelo.setRowCount(0);
+          
+          compras = compraD.comprasProveedor(proveedorSeleccionado.getIdProveedor());
+      
+          for (CompraEntidades compra : compras) {
+            modelo.addRow(new Object[]{compra.getFecha()} );
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

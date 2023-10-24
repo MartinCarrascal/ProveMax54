@@ -5,7 +5,13 @@
  */
 package provemax54_vista;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import provemax54_data.CompraData;
+import provemax54_data.ProductoData;
 import provemax54_entidades.ProductoEntidades;
+import provemax54_entidades.ProveedorEntidades;
 
 /**
  *
@@ -13,12 +19,28 @@ import provemax54_entidades.ProductoEntidades;
  */
 public class DetalleProductoPorProveedorVista extends javax.swing.JInternalFrame {
     ProductoEntidades producto;
+    ProductoData prod;
+    CompraData compra;
+    private String nombreProducto;
+    
+    private DefaultTableModel modelo;
 
     /**
      * Creates new form DetalleProducto
      */
     public DetalleProductoPorProveedorVista() {
+        prod = new ProductoData();
+       
+        compra = new CompraData();
         initComponents();
+         modelo = (DefaultTableModel)jTable.getModel();
+         
+        List<ProductoEntidades> proListas = prod.listarProductos();
+  
+        jCMarcaProd.setModel(new DefaultComboBoxModel(proListas.toArray(new ProductoEntidades[proListas.size()])));
+          nombreProducto = ((ProductoEntidades)jCMarcaProd.getSelectedItem()).getNombreProducto();
+         llenarTabla();
+       
     }
 
     /**
@@ -37,7 +59,7 @@ public class DetalleProductoPorProveedorVista extends javax.swing.JInternalFrame
         jLabel4 = new javax.swing.JLabel();
         jCMarcaProd = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTextPane1);
@@ -57,18 +79,27 @@ public class DetalleProductoPorProveedorVista extends javax.swing.JInternalFrame
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Proveedor", "Descripcion", "Precio Unit."
+                "Razon Social", "Direccion", "Telefono"
             }
-        ));
-        jScrollPane3.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         jBSalir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jBSalir.setText("SALIR");
@@ -122,13 +153,23 @@ public class DetalleProductoPorProveedorVista extends javax.swing.JInternalFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCMarcaProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCMarcaProdActionPerformed
-        // TODO add your handling code here:
+         nombreProducto = ((ProductoEntidades)jCMarcaProd.getSelectedItem()).getNombreProducto();
+         llenarTabla();
     }//GEN-LAST:event_jCMarcaProdActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void llenarTabla() {
+        modelo.setRowCount(0);
+        List<ProveedorEntidades> proveedores;
+        proveedores = compra.proveedoresPorProducto(nombreProducto);
+        for (ProveedorEntidades prove : proveedores) {
+            modelo.addRow(new Object[]{prove.getRazonSocial(), prove.getDomicilio(), prove.getTelefono()} );
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSalir;
@@ -137,7 +178,7 @@ public class DetalleProductoPorProveedorVista extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
