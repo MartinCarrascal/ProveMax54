@@ -3,11 +3,20 @@ package provemax54_vista;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import provemax54_data.Conexion;
 import provemax54_data.ProveedorData;
 import provemax54_entidades.ProveedorEntidades;
 
@@ -20,11 +29,13 @@ public class DetalleCompraVista extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo;
     List<ProveedorEntidades> listarProveedor;
     ProveedorEntidades provE;
-
+ Connection connection = Conexion.getConexion();
+ 
+ 
     public DetalleCompraVista() {
         
         initComponents();
-        modelo = new DefaultTableModel();
+//        modelo = new DefaultTableModel();
         comboModel = new DefaultComboBoxModel();
         provE = new ProveedorEntidades();
         provD = new ProveedorData();
@@ -32,14 +43,17 @@ public class DetalleCompraVista extends javax.swing.JInternalFrame {
 
     
     
+        modelo = new DefaultTableModel(new Object[]{"Marca", "descripcion", "cantidad", "PrecioActual", "Subtotal"}, 0);
+        //Asignar el modelo de la tabla a la tabla de la vista. La tabla no se mostró hasta que coloque el código de asignación de abajo.
+         jTDetalleComp.setModel(modelo); 
+        
+        
+         
      //Hago un evento que escuche al seleccinar un item
-        jCProveedor.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent ie){
-                if(ie.getStateChange()==ItemEvent.SELECTED){
-                    provE = (ProveedorEntidades)jCProveedor.getSelectedItem();
+        jCProveedor.addItemListener((ItemEvent ie) -> {
+            if(ie.getStateChange()==ItemEvent.SELECTED){
+                provE = (ProveedorEntidades)jCProveedor.getSelectedItem();
 //                    cargarTabla;
-                }
             }
         });
     }
@@ -143,6 +157,12 @@ public class DetalleCompraVista extends javax.swing.JInternalFrame {
         });
 
         jDateChooser1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+                jDateChosser1PropertyChangeListener(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,8 +175,8 @@ public class DetalleCompraVista extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(46, 46, 46)
-                        .addComponent(jCProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
+                        .addComponent(jCProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(75, 75, 75))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -217,11 +237,74 @@ public class DetalleCompraVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        // TODO add your handling code here:
+         java.util.Date fechaSeleccionada = jDateChooser1.getDate();
+        
+         // Obtener ID Proveedor seleccionado
+    ProveedorEntidades proveedorSeleccionado = (ProveedorEntidades) jCProveedor.getSelectedItem();
+    int idProveedor = provE.getIdProveedor();
+        
+//    //Conectar... 
+//  Connection conexion = null;
+//    
+//  conexion = Conexion.getConexion();
+    
+    //Consulta con los parámetros de fecha e idProveedor
+     String consultaSQL = "SELECT p.nombreProducto, p.descripcion, dc.cantidad, p.precioActual, (dc.Cantidad * p.precioActual) AS Subtotal " +
+                         "FROM producto p " +
+                         "INNER JOIN detalleCompra dc ON p.idProducto = dc.idProducto " +
+                         "INNER JOIN compra c ON dc.idCompra = c.idCompra " +
+                         "WHERE c.fecha = ? AND c.idProveedor = ?";
+    
+           
+         try ( PreparedStatement statement = connection.prepareStatement(consultaSQL)) {
+        // Parámetros de la consulta
+        statement.setDate(1, new java.sql.Date(fechaSeleccionada.getTime()));
+        statement.setInt(2, idProveedor);
+
+        // Ejecuta la consulta y obtiene los resultados
+        ResultSet resultado = statement.executeQuery();
+
+        // Limpia el modelo de la tabla antes de agregar nuevos datos
+        modelo.setRowCount(0);
+
+        // Itera a través de los resultados y agrega filas a la tabla
+        while (resultado.next()) {
+            String nombreProducto = resultado.getString("nombreProducto");
+            String descripcion = resultado.getString("descripcion");
+            int cantidad = resultado.getInt("cantidad");
+            double precioActual = resultado.getDouble("precioActual");
+            double subtotal = resultado.getDouble("Subtotal");
+
+            // Agrega una fila a la tabla con los datos
+            modelo.addRow(new Object[]{nombreProducto, descripcion, cantidad, precioActual, subtotal});
+           
+        }
+
+        // Calcula y muestra el total de la compra
+        double total = calcularTotalCompra();
+        jTTotalCompra.setText(String.valueOf(total));
+    } catch (SQLException e) {
+        e.printStackTrace();
+  }          
+    }
+    
+    
+          private double calcularTotalCompra() {
+    double total = 0.0;
+    for (int row = 0; row < modelo.getRowCount(); row++) {
+        double subtotal = (double) modelo.getValueAt(row, 4);
+        total += subtotal;
+    }
+    return total;
+
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-        // TODO add your handling code here:
+      DefaultTableModel modelo = (DefaultTableModel) jTDetalleComp.getModel();
+         modelo.setRowCount(0); 
+        // Limpiar la tabla antes de llenarla con datos nuevos.
+         jTTotalCompra.setText("");
+         jDateChooser1.setCalendar(null);
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -231,6 +314,30 @@ public class DetalleCompraVista extends javax.swing.JInternalFrame {
     private void jCProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCProveedorActionPerformed
 //        llenar();
     }//GEN-LAST:event_jCProveedorActionPerformed
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+    
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void jDateChosser1PropertyChangeListener(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChosser1PropertyChangeListener
+         jDateChooser1.addPropertyChangeListener(new PropertyChangeListener() {
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("date".equals(evt.getPropertyName())) {
+            Date selectedDate = jDateChooser1.getDate();
+            
+            if (selectedDate != null) {
+                Date currentDate = new Date(); // Fecha actual
+                  if (selectedDate.after(currentDate)) {
+                JOptionPane.showMessageDialog(null, "La fecha seleccionada supera la fecha actual.");
+//                jDateChooser2.setDate(currentDate); // Establece la fecha actual en el JDateChooser 
+                jDateChooser1.setDate(null); //o borro la fecha selecciona 
+            }
+            }          
+        }
+    }
+         });
+    }//GEN-LAST:event_jDateChosser1PropertyChangeListener
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
