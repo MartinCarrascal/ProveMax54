@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -215,7 +216,7 @@ public class CompraData {
         return proveedores;
     }
     
-     public List<CompraEntidades> ultimaCompra() {
+      public List<CompraEntidades> ultimaCompra() {
          ArrayList<CompraEntidades> compras = new ArrayList<>();
          CompraEntidades comp;
         
@@ -224,15 +225,44 @@ public class CompraData {
          try(PreparedStatement ps = connection.prepareStatement(sql)) {
            
             ResultSet rs = ps.executeQuery();
-            
+           
             while (rs.next()) {    
                 comp = new CompraEntidades();
                 
                 comp.setIdCompra(rs.getInt("idCompra"));
-              comp.setProveedor(proveedor.buscarPorID(rs.getInt("idProveedor")));
+                comp.setProveedor(proveedor.buscarPorID(rs.getInt("idProveedor")));
                
                 comp.setFecha(rs.getDate("fecha").toLocalDate());
+               
+                compras.add(comp);
                 
+            }
+            
+        } catch (Exception e) {
+            mensaje("Error al acceder a la tabla " + e.getMessage());
+        }
+        return compras;
+    }
+    
+  
+       public List<CompraEntidades> listarComprasPorFecha(LocalDate fecha) {
+         ArrayList<CompraEntidades> compras = new ArrayList<>();
+         CompraEntidades comp;
+        
+        String sql = "SELECT * FROM compra WHERE fecha = ? ORDER BY fecha DESC";
+        
+         try(PreparedStatement ps = connection.prepareStatement(sql)) {
+           ps.setDate(0, Date.valueOf(fecha));
+            ResultSet rs = ps.executeQuery();
+           
+            while (rs.next()) {    
+                comp = new CompraEntidades();
+                
+                comp.setIdCompra(rs.getInt("idCompra"));
+                comp.setProveedor(proveedor.buscarPorID(rs.getInt("idProveedor")));
+               
+                comp.setFecha(rs.getDate("fecha").toLocalDate());
+               
                 compras.add(comp);
                 
             }

@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import provemax54_entidades.DetalleCompraEntidades;
 import provemax54_entidades.ProductoEntidades;
@@ -59,6 +61,21 @@ public class DetalleCompraData {
             return detalleCompra;
     }
     
+    public List<DetalleCompraEntidades> listarDetalleXCompra(int compraID) {
+        List<DetalleCompraEntidades> listaDetalles = new ArrayList<>();
+        ProductoData pd = new ProductoData();
+        String sql = "SELECT * FROM detallecompra WHERE  idCompra =" + compraID;
+        try(PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listaDetalles.add(new DetalleCompraEntidades(rs.getInt("idDetalleCompra"), compraID,
+                        pd.buscarProductoPorId(rs.getInt("idProducto")), rs.getInt("cantidad"), rs.getDouble("precioCosto")));
+            }
+        } catch (SQLException e) {
+            
+        }
+        return listaDetalles;
+    }
     
     
 }

@@ -97,7 +97,7 @@ public class CompraEntidades {
  
     @Override
     public String toString() {
-        return "CompraEntidades{" + "idCompra=" + idCompra + ", proveedor=" + proveedor + ", fecha=" + fecha + ", estado=" + estado + ", listaDetalleCompra=" + listaDetalleCompra + '}';
+        return "idCompra=" + idCompra + ", proveedor=" + proveedor.getRazonSocial();
     }
     
     public void remuveDetalleCompra(int index) {
