@@ -420,6 +420,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
             jTTotal.setText(""+compra.devolverTotal());
             if (modelo.getRowCount() == 0) {
                 jBEliminarProd.setEnabled(false);
+                jBGuardarCompra.setEnabled(false);
             } else {
                 table.setRowSelectionInterval(0, 0);
             }
@@ -475,6 +476,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
         prodSeleccionado = (ProductoEntidades) jCProducto.getSelectedItem();
         jSCantidad.setValue(0);
         controlaEstados();
+        jBGuardarCompra.setEnabled(false);
     }//GEN-LAST:event_jCProductoActionPerformed
 
     private void jBCargarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarProdActionPerformed
@@ -540,6 +542,7 @@ public class CompraVista extends javax.swing.JInternalFrame {
     private void manejoBotones(boolean btnAgregar, boolean btnQuitar) {
        jBCargarProd.setEnabled(btnAgregar);
        jBEliminarProd.setEnabled(btnQuitar);
+       jBGuardarCompra.setEnabled(btnQuitar);
     }
 
     
