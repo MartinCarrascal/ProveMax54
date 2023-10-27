@@ -183,7 +183,7 @@
             </Menu>
             <Menu class="javax.swing.JMenu" name="jMUltimaCompra">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ultima Compra"/>
+                <Property name="text" type="java.lang.String" value="ULTIMAS COMPRAS"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="18" style="1"/>
                 </Property>
@@ -196,7 +196,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ultimas compras"/>
+                    <Property name="text" type="java.lang.String" value="Ultima compra"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>

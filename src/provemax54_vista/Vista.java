@@ -16,8 +16,6 @@ public class Vista extends javax.swing.JFrame {
      */
     public Vista() {
         initComponents();
-        setLocationRelativeTo(null);
-        
     }
 
     /**
@@ -202,7 +200,7 @@ public class Vista extends javax.swing.JFrame {
 
         jMenu3.add(jMProdMasComprado);
 
-        jMUltimaCompra.setText("Ultima Compra");
+        jMUltimaCompra.setText("ULTIMAS COMPRAS");
         jMUltimaCompra.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jMUltimaCompra.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -224,7 +222,7 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Ultimas compras");
+        jMenuItem1.setText("Ultima compra");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
